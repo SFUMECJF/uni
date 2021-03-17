@@ -1,0 +1,47 @@
+# Assumptions
+
+* We assume that this app should have a database which include all the password, email address and other informations
+
+* We assume that password and email address should be in pairs, or store in a dictionary, or 2 lists. In this way, we can check if user typed in correct password for the email address.
+
+* We assume there should be a decode function somewhere that takes in token as input and return the authorisation of the user as output. Therefore we can determine if the user has the right to do something, if not then raise access error.
+
+* We assume that token is a rather long string, which includes channel details(message,member,admin and so on) and its associated details. When we call channels_list or channels_listall function, we can have a way to interpret the information that is stored in the token.
+
+* As such, we assume that the token will be encoded in such a way that sensitive
+information, albiet for security or privacy reasons, will not be easily 
+determined
+
+* We assume that the token and its internal timer is refreshed at least once 
+every minute to ensure that the user has not exceeded their 15 minute time 
+window. 
+
+* We assume that there is a time function(maybe import from datetime) that can show us with the time when the message is sent.(stored with message so we can see the message and its corresponding time when it is sent) And it is also useful in message_sendlater.
+
+* We assume there are 4 authorisation value:1,2,3,4 which represents the owner of slackr, owner of channel, admin of channel, member respectively.
+
+* We assume that when logging in, validity of emails are checked before the email has been registered yet.
+
+* We assume that when logging in, the validity of the password is checked before it is compared to the correct password of the email.
+
+* We assume that when registering, validity of emails are checked before it is checked that the email has been registered before.
+
+* We assume that when registering, the first and last names should contain atleast 1 character.
+
+* We assume that when registering, the first and last names should not contain any numbers or symbols.
+
+* We assume that when requesting a password reset, the input email must be valid.
+
+* We assume that when a password reset request is sent, the reset code will contain only letters and numbers.
+
+* We assume that when resetting the password, the new password can be the same as the password before the reset.
+
+* We assume that channels are associated by numbers and not by strings. This does 
+not necesarily mean that the respective channel will not be able to be called
+said string but rather, it's number ID in the database is linked to a string.
+
+* We assume that messages will be saved by separate categorises, 
+accessable through the means of the channel id. This way, messages are 
+attributed via their "channel_data". 
+
+

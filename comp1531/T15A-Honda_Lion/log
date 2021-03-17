@@ -1,0 +1,31 @@
+========== Running frontend on port 8001 ==============
+========== Running backend on port 5001 ==============
+ * Serving Flask app "static" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Serving Flask app "server" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": ""}
+{'message_id': 1, 'u_id': 0, 'message': 'hgjgxch', 'time_created': 1573095622.19713, 'reacts': [], 'is_pinned': False}
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": "127.0.0.1:5001/static/icon.jpg"}
+{'message_id': 1, 'u_id': 0, 'message': 'hgjgxch', 'time_created': 1573095622.19713, 'reacts': [], 'is_pinned': False}
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": "127.0.0.1:5001/static/icon.jpg"}
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": ""}
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": ""}
+{'message_id': 1, 'u_id': 0, 'message': 'hbjv', 'time_created': 1573096421.904786, 'reacts': [], 'is_pinned': False}
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": "/static/icon.jpg"}
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": "/static/icon.jpg"}
+IN ROUTES
+{"u_id": 0, "email": "z5211275@ad.unsw.edu.au", "name_first": "Patrick", "name_last": "Dong", "handle_str": "PatrickDong", "profile_img_url": ""}
