@@ -1,0 +1,102 @@
+#!/usr/bin/python3
+# COMP3311 20T2 Final Exam
+# Q7: tracklist for album, given by Albums.id
+#     show performers/instruments for each track
+
+import sys
+import psycopg2
+
+# ... put helper functions here ...
+def getAlbumName(albumID, cur):
+   """
+   returns name of group from groupID
+   """
+   cur.execute("select albums.title from albums\
+               where albums.id = %s" % albumID)
+
+   return cur.fetchall()
+
+
+def getAlbum(albumID, cur):
+   """
+   Returns a list of all albums made by groupid
+   """
+   cur.execute("select albums.title, albums.year, albums.genre\
+               from albums\
+               where albums.id = %s" % albumID)
+      
+   return cur.fetchall()
+
+
+def getSongs(albumId, cur):
+   """
+   Given album id will return list of songs
+   """
+   cur.execute("select songs.title, songs.trackNo, songs.length, songs.id\
+               from songs\
+               where songs.on_album = %s\
+               order by songs.trackNo asc" % albumId)
+   
+   return cur.fetchall()
+
+def getPlaysOn(songId, cur):
+   """
+   Given songid will return list of people that play on
+   """
+   cur.execute("select songs.trackNo, performers.name, string_agg(distinct playsOn.instrument::text, ',')\
+               from songs\
+               join playsOn on songs.id = playsOn.song\
+               join performers on playsOn.performer = performers.id\
+               where songs.id = %s\
+               group by songs.trackNo, performers.name\
+               order by songs.trackNo asc, performers.name" % songId)
+   
+   return cur.fetchall()
+
+db = None
+cur = None
+usage = f"Usage: {sys.argv[0]} AlbumID"
+
+# process command-line args
+
+if len(sys.argv) < 2:
+   print(usage)
+   exit(1)
+albumID = sys.argv[1]
+if not albumID.isnumeric():
+   print(usage)
+   exit(1)
+
+try:
+   db = psycopg2.connect("dbname=music")
+   # ... your code goes here ...
+
+   cur = db.cursor()
+
+   if len(getAlbumName(albumID, cur)) == 0:
+      print('Invalid album ID')
+      exit()
+   
+   title, year, genre = getAlbum(albumID, cur)[0]
+
+   print ('%s (%s) (%s)' % (title, year, genre))
+   print ("========================================")
+
+   for song in getSongs(albumID, cur):
+      print ('%2d. %s' % (song[1], song[0]))
+      for performer in getPlaysOn(song[3], cur):
+         trackNo, name, instruments = performer
+         print ('%8s%s: %s' % (' ', name, instruments))
+      if len(getPlaysOn(song[3], cur)) == 0:
+         print ('%8sThe whole group' % ' ')
+
+
+
+except psycopg2.Error as err:
+   print("DB error: ", err)
+finally:
+   if cur:
+       cur.close()
+   if db:
+      db.close()
+

@@ -1,0 +1,22 @@
+#!/bin/dash
+
+# Check if repo or file exists 
+if [ -d ".shrug" ] ||  [ -f ".shrug" ]; then 
+    echo "shrug-init: error: .shrug already exists"
+    # exit with error
+    exit 1
+else 
+    # Else ereate new repo
+    mkdir ".shrug"
+    touch .shrug/log
+    mkdir ".shrug/branch"
+    mkdir ".shrug/branch/master"
+    mkdir ".shrug/branch/master/index"
+    mkdir ".shrug/branch/master/last"
+    mkdir ".shrug/branch/master/staged"  
+    mkdir ".shrug/branch/master/status"
+    mkdir ".shrug/branch/deleted"
+    mkdir ".shrug/branch/master/removed"
+    echo "Initialized empty shrug repository in .shrug"
+
+fi

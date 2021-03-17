@@ -1,0 +1,87 @@
+#!/bin/dash
+
+# Check for existing repo
+if [ ! -d .shrug ]; then 
+    echo "shrug-add: error: no .shrug directory containing shrug repository exists"
+    # exit with error
+    exit 1 
+fi
+
+path=".shrug/branch/master"
+
+force=0
+cached=0
+for argument in "$@"; do 
+    # checks argument existence
+    if [ $argument = "--cached" ]; then
+        cached=1
+        continue
+    elif [ $argument = "--force" ]; then
+        force=1
+        continue
+    fi 
+
+    # first check to see if file is actually in repo
+    if [ ! -f "$path/index/$argument" ]; then
+        echo "shrug-rm: error: '$argument' is not in the shrug repository"
+        exit 1
+    fi
+
+    # cached checks for staged content matching latest or file on disk
+    # if statements match git desc
+    # cant be removed if they are not identical to the tip of branch
+    # or they they staged updates not commited yet
+    
+    if [ $force -eq 0 ]; then
+        # if changes are already staged
+        if [ -f "$path/last/$argument" ] &&
+            ! (cmp -s "$argument" "$path/index/$argument") && 
+            ! (cmp -s "$path/index/$argument" "$path/last/$argument"); then
+            
+            echo "shrug-rm: error: '$argument' in index is different to both working file and repository"
+            exit 1
+        fi
+    fi
+
+    # ehecks existance in top of branch AND on disk. only if cached NOT selected
+    if [ $cached -eq 0 ] && [ $force -eq 0 ]; then 
+        # checks if file is the same in latest commit and 
+        if ! (cmp -s "$argument" "$path/index/$argument") && [ -f "$path/last/$argument" ]; then
+            echo "shrug-rm: error: '$argument' in repository is different to working file"
+            exit 1
+        # checks if file has been changed for non-cached check. Staged or removed
+        elif [ -f "$path/staged/$argument" ] || [ -f "$path/removed/$argument" ]; then
+            echo "shrug-rm: error: '$argument' has changes staged in the index"
+            exit 1
+        fi
+    fi
+    
+    # --force modifier ignores all checking and remove file in index and working tree
+done
+
+for argument in "$@"; do 
+
+    # ignore if argument is modifier
+    if [ $argument = "--cached" ] || [ $argument = "--force" ];  then
+        continue
+    fi
+
+    # move file in index to bin. Covers --cached = 1 and all --force
+    # remove stage to prevent overwriteing
+    mv "$path/index/$argument" "$path/removed/$argument"
+    rm -rf "$path/staged/$argument"
+    	
+    # default base action. Removes from working tree if --cached is not modified
+    # covers force function as well.
+    if [ $cached -eq 0 ]; then
+        # destroy cache
+        rm -rf "$argument"
+
+        # removes froms staged if the file never existed in last commit
+        if [ ! -f "$path/last/$argument" ]; then
+            rm -rf "$path/removed/$argument"
+        fi
+    fi
+
+done
+

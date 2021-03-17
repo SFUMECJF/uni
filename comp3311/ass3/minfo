@@ -1,0 +1,101 @@
+#!/usr/bin/python3
+# COMP3311 20T3 Ass3 ... print info about cast and crew for Movie
+# by John Dao z5258962
+# November 2020 20T2
+
+import sys
+import psycopg2
+#from helpers import whatever, functions, you, need
+
+# define any local helper functions here
+
+# set up some globals
+
+usage = "Usage: minfo 'MovieTitlePattern' [Year]"
+db = None
+
+from helpers import queryMovieSearch as movieSearch
+from helpers import queryMovieSearchYear as movieSearchYear
+from helpers import getCast
+
+# process command-line args
+
+argc = len(sys.argv)
+query = ''
+year = ''
+if argc == 2 or argc == 3:
+  if sys.argv[1].isdigit():
+    print (usage)
+    exit()
+  else:
+    query = sys.argv[1]
+    if argc == 3  and sys.argv[2].isdigit():
+      year = sys.argv[2]
+    elif argc == 3  and not sys.argv[2].isdigit():
+      print (usage)
+      exit()
+else:
+  print(usage)
+  exit()
+
+# manipulate database
+
+try:
+  db = psycopg2.connect("dbname=imdb")
+
+  # ... add your code here ...  
+  cur = db.cursor()
+  # runs the appropriate code to get results for year and no year
+  if argc == 2:
+    results = movieSearch(query)
+  else:
+    results = movieSearchYear(query, year)
+  # no results
+  # no year provided
+  if len(results) == 0 and year == '':
+    print ("No movie matching '%s'" % query)
+  # year provided
+  elif len(results) == 0 and year != '':
+    print ("No movie matching '%s' %s" % (query, year))
+
+  # multiple results
+  # prints out all the possible matches
+  elif len(results) > 1:
+    # search with year
+    if year != '':
+      print ("Movies matching '%s' %s" % (query.rstrip(), year))
+    # search without
+    else:
+      print ("Movies matching '%s'" % query.rstrip())
+    print ("===============")
+
+    # loop to print all results
+    for movie in results:
+      title, year, movieID = movie
+      print (title, "(%s)" % year)
+  # 1 result
+  else:
+    # prints initial title statement
+    title, start_year, movieID = results[0]
+    print ("%s (%s)" % (title, start_year))
+    print ('===============')
+    crew, cast = getCast(movieID)
+    
+    # loops and prints all cast members
+    print ("Starring")
+    for castMember in cast:
+      name, playing = castMember
+      print (" %s as %s" % (name, playing))
+    
+    print ("and with")
+    # loops and prints all crew members
+    for crewMember in crew:
+      name, role = crewMember
+      print (" %s: %s" % (name, role.capitalize()))
+      
+except psycopg2.Error as err:
+  print("DB error: ", err)
+finally:
+  if db:
+    db.close()
+

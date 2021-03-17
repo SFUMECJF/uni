@@ -1,0 +1,21 @@
+Diary for COMP2041 assignment 1
+Created by John Dao, z5258962.
+            j.dao@student.unsw.edu.au
+
+Due to issues with personal UNSW gateway and Vlab, I have chosen to use a personal repository on github to develop my work. Access can be requested with appropriate timestamps if requested. Will also link in this file below;
+https://github.com/jndao/COMP2041
+
+Date    Time Start  Time Stop   Description
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+11/7/20 10:00AM     3:00PM      Created github repo and begun determining index structure
+11/7/20 8:00PM      00:00AM     Begun work on basic code structure including creating starterfiles for assignment
+12/7/20 12:00PM     3:00PM      Re-created github repo due to personal OCD and copied over created files. Continued to work on code and research into the best way to structure
+13/7/20 1:00PM      5:00PM      Continued development into subset0. APROX 40% complete. Moved over to 2511 assignment
+14/7/20 9:00AM      12:00PM     Continued development into subset0. Completed shrug-add shrug-log shrug-init. APROX 75% complete
+14/7/20 12:00PM     3:00PM      Considered integration of subset1 with subset0. Decided on restructure and remade some parts of Subset0 features
+15/7/20 10:00AM     12:00PM     Continued developing subset0 with the imminent completion of furst subset on the horizon
+15/7/20 12:00PM     3:00PM      Completed debuging of subset0, syntax editing and cleaning code. Begun increase subset1 integration
+15/7/20 3:00PM      6:00PM      Completed most of subset1. Still buggy subset-show due to not being able to copy in current dir files. Many bugs caused in original subset0 after integration.
+15/7/20 6:00PM      8:00PM      Completed most debugging of subset0 and subset1. Currently passing 16/19 tests for subset0 and subset1. Now beggining development of tests
+15/7/20 8:00PM      Submission  Continued debugging and cleaning of code. Developed of tests was pushed as well as diary.txt which was kept on LOCAL PC and not ever pushed. Final checks and final submission.
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="levelSelectVbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.dungeon.controller.LevelSelectController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+         <children>
+            <Button fx:id="tutorialBtn" mnemonicParsing="false" onAction="#handleOnTutorial" prefHeight="50.0" prefWidth="100.0" text="Tutorial" />
+            <Button fx:id="levelOneBtn" mnemonicParsing="false" onAction="#handleOnLevelOne" prefHeight="50.0" prefWidth="100.0" text="Level 1" />
+            <Button fx:id="levelTwoBtn" mnemonicParsing="false" onAction="#handleOnLevelTwo" prefHeight="50.0" prefWidth="100.0" text="Level 2" />
+            <Button fx:id="levelThreeBtn" mnemonicParsing="false" onAction="#handleOnLevelThree" prefHeight="50.0" prefWidth="100.0" text="Level 3" />
+         </children>
+      </HBox>
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleOnBack" prefHeight="30.0" prefWidth="75.0" text="Back">
+         <VBox.margin>
+            <Insets top="25.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+   <padding>
+      <Insets top="75.0" />
+   </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>

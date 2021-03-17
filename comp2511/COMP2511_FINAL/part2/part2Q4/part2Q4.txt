@@ -1,0 +1,4 @@
+The factory method and the abstract factory methods are two patterns with varying design roles in JAVA.
+
+The factory method pattern allows the creation of objects without the specification of their actual class. It is an interface that allows and relies on its subclasses to alter the type of objects created.
+However even though similar, the abstract factory method has a differs to the factory method pattern in some ways. The abstract factory method is used to create families of related objects without specifying their concrete classes and unlike the factory method, relies on another object for its instantation via composition

@@ -1,0 +1,26 @@
+# COMP3311 20T3 Final Exam Q12
+
+(a)
+Given the schedules and reading from left to right (reading schedule),
+There a few arrows that would be drawn on a precedence graph.
+They are 
+T2 -> T1 on R(Y) -> W(Y)
+T1 -> T2 on W(X) -> W(X)
+T1 -> T3 on W(X) -> W(X)
+T2 -> T3 on W(X) -> W(X)
+
+Because we have a cycle between T1 and T2, we know that this schedule is not conflict serializable.
+
+(b)
+
+Since the schedule is not conflict serializable and there is a blind write in T3, it may or may not be view serializable.
+
+Since we know the schedule, we can determine the dependencies.
+T2 must occur before T1 because R(Y) must be read before W(Y).
+Thus we get the dependeny T2->T1
+
+T1 must occur after all transactions of Y due to it writing to X last and must be after all other transactions that include Y.
+
+For X, there are no reads and with the last write being a blind write in T3
+
+Thus, the schedule is view serializable 

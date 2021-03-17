@@ -1,0 +1,39 @@
+Exercise 1: nslookup
+
+1. The ip addresses of the website "www.koala.com.au" are 172.67.219.46, 104.18.60.21 and 104.18.61.21
+    The main reason for having multiple IP addresses is in the use case of a round-robin DNS server which allows for load distribution and balancing
+
+2. The name of the ip address is localhost and is the ip address that represents the working computer itself, by itself. In other cases where communication is required for other computers is needed, another ip address is utilised.
+
+Exercise 2: Use ping to test host reachability
+
+Some of the given hosts are not reachable. Below, they are sorted by error.
+
+Unknown host:
+In this case, the given hostname could not be identitfied via ping which indicates that the given hostname does not exist.
+    - www.getfittest.com.au (Valid hostname that does not point to anything as of current)
+    - www.hola.hp (invalid hostname that will never exist)
+
+TimeOut:
+In this case, the given hostname exists however, is not reachable due via ping to variety of reasons which may be, but not limited to, avaliability, ping time, security.
+    - www.kremlin.ru (in this case, it would be good to assume that this due to security reasons)
+ALl other urls are successfully pinged.
+
+Exercise 3: Use traceroute to understand network topology
+
+1. 
+There are a total of 21 routers between my workstation and www.columbia.edu. 
+There are 5 seperate routers from the assumed unsw network spanning from router 3 and 7.
+It could be assumed that the connection passed the pacific ocean from router with ip 193.251.248.35 to router with ip 130.117.15.233. It seems that the signal was carried by cogent via their hostnames "opentransit" (sender) and "cogentco.com" (reciever).
+
+2. 
+The three traceroutes diverge after are carried by the vocus network to their respective international carriers. 
+The vocus network seems to be a networking system mainly operating within australia and some international countries. Their head office  is in melbourne and their ABN is 96 084 115 499.
+
+In this case vocus has transfered the connection respectively to:
+
+- he.net for www.ucla.edu (hurricane electric internet services?)
+- hkix.net for www.u-tokyo.ac.jp (Hong kong internet exchange?)
+- flagtel.com for www.lancaster.ac.uk (hostname for Looking glass transit?)
+
+The number of hops is not proportional to the physical distance due to the 

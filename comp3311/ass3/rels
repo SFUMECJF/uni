@@ -1,0 +1,81 @@
+#!/usr/bin/python3
+# COMP3311 20T3 Ass3 ... print info about different releases for Movie
+# by John Dao z5258962
+# November 2020 20T2
+
+import sys
+import psycopg2
+#from helpers import whatever, functions, you, need
+from helpers import queryMovieSearch as movieSearch
+
+# define any local helper functions here
+
+# set up some globals
+
+usage = "Usage: rels 'PartialMovieTitle'"
+db = None
+
+# process command-line args
+
+# check if the command input is correct
+argc = len(sys.argv)
+query = ''
+if argc != 2:
+  print (usage)
+  exit()
+else:
+  query = sys.argv[1]
+# manipulate database
+
+
+try:
+  db = psycopg2.connect("dbname=imdb")
+  # ... add your code here ...
+  cur = db.cursor()
+  
+  # filters results based on number of results
+  results = movieSearch(query)
+  # 0 results = no matches
+  if len(results) == 0:
+    print ("No movie matching '%s'" % query)
+  # more than one result
+  elif len(results) > 1:
+    print ("Movies matching '%s'" % query)
+    print ("===============")
+    for movie in results:
+      title, start_year, movieID = movie
+      print (title, '(%s)' % start_year)
+  # 1 result only
+  else:
+    # searches for all aliases and sorts by ordering 
+    movie, start_year, movieID = results[0]
+    cur.execute("SELECT local_title, region, movie_id, language, start_year, ordering\
+                 FROM aliases\
+                 INNER JOIN movies ON %d = movies.id AND movie_id = %s\
+                 ORDER BY ordering" % (movieID, movieID))
+    results = cur.fetchall()
+    # no aliases
+    if len(results) == 0:
+      print("%s (%s) has no alternative releases" % (movie, start_year))
+
+    # else prints all aliases based on check guideline syntax
+    else:
+      print ("%s (%s) was also released as" % (movie, start_year))
+      for alias in results:
+        name, region, MovieID, language, start_year, ordering = alias
+        print ("'%s'" % name, end ='')
+        if region is not None and language is not None:
+          print (' (region: %s, ' % region.rstrip(), end ='')
+        else:
+          print (' (region: %s)' % region.rstrip(), end ='')
+        if language is not None:
+          print ('language: %s)' % language.rstrip())
+        else:
+          print('')
+
+except psycopg2.Error as err:
+  print("DB error: ", err)
+finally:
+  if db:
+    db.close()
+

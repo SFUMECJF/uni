@@ -1,0 +1,129 @@
+{
+  "width": 20,
+  "height": 18,
+  "entities": [
+    {
+      "x": 0,
+      "y": 0,
+      "type": "wall"
+    },
+    {
+      "x": 19,
+      "y": 15,
+      "type": "sword"
+    },
+    {
+      "x": 19,
+      "y": 14,
+      "keyID" : 0,
+      "type": "sword"
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "type": "invincibility"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "type": "treasure"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "type": "treasure"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "type": "treasure"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "keyID" : 0,
+      "type": "key"
+    },
+    {
+      "x": 16,
+      "y": 14,
+      "keyID" : 0,
+      "type": "key"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "doorID" : 0,
+      "type": "door"
+    },
+    {
+      "x" : 1,
+      "y" : 6,
+      "type" : "switch",
+      "tX" : 1,
+      "tY" : 3
+    },
+    {
+      "x" : 2,
+      "y" : 6,
+      "type" : "switch",
+      "tX" : 1,
+      "tY" : 3
+    },
+    {
+      "x" : 5,
+      "y" : 5,
+      "type" : "exit"
+    },
+    {
+      "x" : 10,
+      "y" : 10,
+      "type" : "portal",
+      "cX" : 15,
+      "cY" : 10
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "type": "boulder"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "boulder"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "player"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "type": "sword"
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "type": "wall"
+    }
+  ],
+  "goal-condition": {
+    "goal": "treasure"
+  }
+}

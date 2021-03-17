@@ -1,0 +1,8 @@
+The decorator pattern and the builder pattern are two different design patterns and serve two entirely different purposes in JAVA.
+
+The decorator pattern is used to dynamically add resposibilities and selective functionality to an object. It does NOT change the original class and uses a wrapper within the class ultimately making it a structural pattern.
+
+However, the builder pattern is used to entirely differently. The builder pattern is used to CONSTRUCT an object in steps and ultimately allows the object to be formed with many varying types and representations with the same constructor code.
+
+Ultimately the decorator adds to classes after construction whereas the builder constructs different types and representations of instances of desired classes.
+

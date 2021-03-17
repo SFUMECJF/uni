@@ -1,0 +1,26 @@
+# COMP3311 20T3 Final Exam Q10
+
+(a)
+in relational notation
+    fId -> from, to, distance, departs, arrives, price
+    aid -> aname, range
+    eid -> ename, salary
+    aircraft -> aid, aname, range *
+    employee -> eid, ename, salary *
+
+(b)
+    Since both aircraft and employee can lead to candidate keys and where relations * have X as not a superkey,
+    a build could look like this if multiple Certifications for aircraft are needed 
+
+    Flights(fid, from, to, distance, departs, arrives, price)
+    Aircraft(aid, aname, range)
+    Certifications(cid, employeeId, aircraftId)
+    Employees (eid, ename, salary)
+
+    Or, the option more in line with today's pilots (somewhat), if only one major aircraft certification is allowed for each employee
+
+    Flights(fid, from, to, distance, departs, arrives, price)
+    Aircraft(aid, aname, range)
+    Certifications(cid, aircraftId)
+    Employees (eid, ename, salary, certification)
+

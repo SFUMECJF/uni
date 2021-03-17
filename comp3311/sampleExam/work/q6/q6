@@ -1,0 +1,106 @@
+#!/usr/bin/python3
+# COMP3311 20T2 Final Exam
+# Q6: print match reports for a specified team in a given year
+
+import sys
+import psycopg2
+
+# ... put helper functions here ...
+
+def checkTeam(name, cur):
+    cur.execute("SELECT * from teams\
+                where teams.country like '%s'" % name)
+    if len(cur.fetchall()) == 0:
+        return False
+    else:
+        return True
+
+# Searched for matches played in given year by a team with country name 'name'
+def teamYearSearch(name, year, cur):
+    cur.execute("SELECT matches.id, playedOn, city\
+                from teams\
+                join involves on teams.id = involves.team\
+                join matches on involves.match = matches.id\
+                where teams.country like '%s' and EXTRACT(year from matches.playedOn) = %s\
+                order by playedOn" % (name, year))
+    return cur.fetchall()
+
+def getOpp(matchId, name, cur):
+    cur.execute("select teams.country\
+                from teams\
+                join involves on teams.id = involves.team\
+                join matches on involves.match = matches.id\
+                join players on teams.id = players.memberOf\
+                where teams.country not like '%s' and matches.id = %s\
+                group by teams.country" % (name, matchId))
+    return cur.fetchall()
+
+def getForGoals(matchId, name, cur):
+    cur.execute("select count(goals.id)\
+                from teams\
+                join involves on teams.id = involves.team\
+                join matches on involves.match = matches.id\
+                join players on teams.id = players.memberOf\
+                join goals on matches.id = goals.scoredIn and players.id = goals.scoredBy\
+                where teams.country like '%s' and matches.id = %s" % (name, matchId))
+    return cur.fetchall()
+
+def getAgnGoals(matchId, name, cur):
+    cur.execute("select count(goals.id)\
+                from teams\
+                join involves on teams.id = involves.team\
+                join matches on involves.match = matches.id\
+                join players on teams.id = players.memberOf\
+                join goals on matches.id = goals.scoredIn and players.id = goals.scoredBy\
+                where teams.country not like '%s' and matches.id = %s" % (name, matchId))
+    return cur.fetchall()
+
+db = None
+cur = None
+
+
+if len(sys.argv) < 3:
+   print(f"Usage: {sys.argv[0]} TeamName Year")
+   exit(1)
+team = sys.argv[1]
+year = sys.argv[2]
+if not year.isnumeric():
+   print(f"Invalid year {year}")
+   exit(1)
+
+try:
+   db = psycopg2.connect("dbname=footy")
+   # ... your code goes here ...
+   cur = db.cursor()
+    
+   if not checkTeam(team, cur):
+       print ("No team '%s'" % team)
+       exit()
+
+   allGames = teamYearSearch(team, year, cur)
+   if len(allGames) == 0:
+       print ("No matches")
+       exit()
+
+   for game in allGames:
+       matchId, playedOn, city = game
+       oppName = getOpp(matchId, team, cur)[0][0]
+       agnGoals = getAgnGoals(matchId, team, cur)[0][0]
+       forGoals = getForGoals(matchId, team, cur)[0][0]
+
+       print ("played %s in %s on %s and" % (oppName, city, playedOn), end=' ')
+       if agnGoals == forGoals:
+           print ('drew %s-%s' % (agnGoals, forGoals))
+       elif (agnGoals > forGoals):
+           print ('lost %s-%s' % (forGoals, agnGoals))
+       else:
+           print ('won %s-%s' % (forGoals, agnGoals))
+
+except psycopg2.Error as err:
+	print("DB error: ", err)
+finally:
+   if db:
+      db.close()
+   if cur:
+       cur.close()
+       

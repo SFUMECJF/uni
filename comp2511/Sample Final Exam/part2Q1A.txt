@@ -1,0 +1,1 @@
+The OO principle of encaptulation is broken here due to the fact that the variables declared are public. This may cause clashes within declarations with other objects inherited and etc such as using the double 'balance'. 

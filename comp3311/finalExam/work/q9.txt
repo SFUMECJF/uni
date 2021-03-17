@@ -1,0 +1,90 @@
+# COMP3311 20T3 Final Exam Q9
+
+(a)
+
+create or replace function  
+    checkGroupDisbanded(_bName integer) returns integer
+as $$
+    declare bId integer := $1;
+
+begin
+    return (
+        select count(MemberOf) from groups
+        join MemberOf on groups.id = memberOf.in_group and memberOf.departed is NULL
+        where bId = groups.id
+    );
+
+end;
+
+$$ language plpgsql
+;
+
+create or replace function  
+    updateGroupDisbanded() returns trigger
+
+as $$
+
+begin
+
+    if (checkGroupDisbanded(NEW.in_group) = 0) then
+        update groups set disbanded = NEW.departed
+        where groups.id = NEW.in_group;
+    end if;
+    return NEW;
+end;
+
+$$ language plpgsql
+;
+
+create trigger groupDisbanded
+after update on MemberOf 
+for each row
+execute procedure updateGroupDisbanded();
+
+
+(b)
+---
+this assumes that there is a function generateGroupId() 
+that will return a positive unique id for the new group (pos)
+---
+
+create or replace function  
+    updateGroupNames() returns trigger
+
+as $$
+
+begin
+
+    update groups set disbanded = current_date()
+    where groups.id = NEW.in_group;
+    newGroupId := generateGroupId()
+    insert into groups (id, name, formed, disbanded) values (newGroupId, NEW.name, current_date(), NULL);
+
+    -- creates new memberOfs with groupid -1 for the new group with new name (not set yet) from all members of old group
+    insert into memberOf (in_group, performer, joined, departed)
+    select -1, performers.id, current_date(), null from performers
+            join memberOf on performers.id = memberOf.id
+            where memberOf.in_group = NEW.id
+    
+    -- makes it that all performers are departed from the old group
+    update memberOf set departed = current_date()
+    where groups.id = NEW.in_group;
+
+    -- sets new memberofs to new group with current date and no departed
+    update memberOf set in_group = newGroupId
+    where groups.id = -1;
+
+    -- disbands old group and sets it to current date. It is then returned as the new value
+    NEW.disbanded = current_date()
+    return NEW;
+end;
+
+$$ language plpgsql
+;  
+
+create trigger groupDisbanded
+after update on groups 
+for each row
+execute procedure updateGroupName();
+
+

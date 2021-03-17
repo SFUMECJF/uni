@@ -1,0 +1,2 @@
+As what can be observed from the results, the built in sort command vastly outperformed my own built sorting method. This can be most likely be attributed with the use of a while loop to cycle through the data as this causes the run time to increase exponentially. This was also indicated with the use of the sorting of one million random repeating numbers in which my method consistently ran over 10 minutes (without completion).
+Thus the method I developed was outperformed in every single right by the built in sort function due to it being based on a loop.

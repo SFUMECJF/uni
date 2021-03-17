@@ -1,0 +1,14 @@
+{ "command": "request", "id": "sum", "start": "2019-03-01", "end": "2019-03-04", "small": 1, "medium": 0, "large": 0 }
+{ "command": "request", "id": "bad", "start": "2019-03-01", "end": "2019-03-04", "small": 0, "medium": 1, "large": 0 }
+{ "command": "request", "id": "baby", "start": "2019-03-01", "end": "2019-03-04", "small": 0, "medium": 0, "large": 1 }
+{ "command": "list", "venue": "Foo" }
+{ "command": "list", "venue": "Zoo" }
+{ "command": "cancel", "id": "sum" }
+{ "command": "cancel", "id": "bad" }
+{ "command": "cancel", "id": "baby" }
+{ "command": "list", "venue": "Foo" }
+{ "command": "change", "id": "sum", "start": "2019-03-01", "end": "2019-03-04", "small": 1, "medium": 0, "large": 0 }
+{ "command": "change", "id": "bad", "start": "2019-03-01", "end": "2019-03-04", "small": 0, "medium": 1, "large": 0 }
+{ "command": "change", "id": "baby", "start": "2019-03-01", "end": "2019-03-04", "small": 0, "medium": 0, "large": 1 }
+{ "command": "list", "venue": "Foo" }
+{ "command": "list", "venue": "Zoo" }

@@ -1,0 +1,9 @@
+{ "command": "room", "venue": "Zoo", "room": "Penguin", "size": "small" }
+{ "command": "room", "venue": "Zoo", "room": "mediumPenguin", "size": "medium" }
+{ "command": "room", "venue": "Zoo", "room": "largePenguin", "size": "large" }
+{ "command": "request", "id": "indecisive", "start": "2019-03-01", "end": "2019-03-02", "small": 1, "medium": 0, "large": 0 }
+{ "command": "change", "id": "indecisive", "start": "2019-03-01", "end": "2019-03-02", "small": 0, "medium": 1, "large": 0 }
+{ "command": "change", "id": "indecisive", "start": "2019-03-01", "end": "2019-03-02", "small": 0, "medium": 0, "large": 1 }
+{ "command": "list", "venue": "Zoo" }
+{ "command": "cancel", "id": "indecisive" }
+{ "command": "list", "venue": "Zoo" }

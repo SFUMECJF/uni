@@ -1,0 +1,4 @@
+There are many changes that I would make to make the SavingsAccount class immutable.
+Firstly I would ensure that the SavingsAccount works as intended by making the class Account, an interface which is implemented by SavingsAccount. This ensures that there are no classes as described in 2Q1B.
+I would then make Savings class a 'final' that implements Account, instead of extends. This way, the Savings Account becommes immutable.
+I would then change all of the members/attributes to private and final to ensure that no illegal changes could be made without appropriate getters and setters wich do not modify any of its immutable attributes.

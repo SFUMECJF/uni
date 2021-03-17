@@ -1,0 +1,55 @@
+#!/bin/dash
+
+path=".shrug/branch/master"
+commitMesg=$2
+
+# Check for existing repo
+if [ ! -d .shrug ]; then 
+    echo "shrug-add: error: no .shrug directory containing shrug repository exists"
+    # exit with error
+    exit 1 
+fi
+
+# run shrug-add for files that have yet to be staged.
+if [ $1 = "-a" ]; then
+    for afile in $path/index/*; do
+        set -- $(basename $afile) 
+        . shrug-add $afile
+    done
+
+    # change commitmesg as argument number is shifted
+    commitMesg=$3
+fi
+
+# check if there are any changes to commit
+if [ -z "$(ls $path/staged)" ] && [ -z "$(ls $path/removed)" ]; then
+    echo "nothing to commit"
+    exit 1
+fi
+
+# gets number of previous commits
+# makes new directory for new commit
+# prepare latest update by deleting latest commit
+commitNum=$(wc -l .shrug/log | cut -d " " -f1)
+mkdir "$path/$commitNum"
+rm -rf $path/last/*
+
+# commits file into new commit and sets it as the last committed
+for afile in $path/index/*; do
+    if [ ! -f $afile ]; then
+		continue
+	else 
+        cp "$afile" "$path/$commitNum/"
+        cp "$afile" "$path/last/"
+    fi
+    
+done
+
+# Echo to user that commit has been undertaken and adds the message to the log
+echo "Committed as commit $commitNum"
+log=".shrug/log"
+echo "$commitNum $commitMesg" >> $log
+
+# Clean working tree
+rm -rf $path/staged/*
+rm -rf $path/removed/*

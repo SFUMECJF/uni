@@ -1,0 +1,92 @@
+#!/bin/dash
+
+# Check for existing repo
+if [ ! -d .shrug ]; then 
+    echo "shrug-add: error: no .shrug directory containing shrug repository exists"
+    # exit with error
+    exit 1 
+fi
+
+status0="- untracked"
+status1="- file deleted"
+status2="- deleted"
+status3="- added to index"
+status4="- file changed, different changes staged for commit"
+status5="- file changed, changes not staged for commit"
+status6="- file changed, changes staged for commit"
+status7="- same as repo"
+path=".shrug/branch/master" 
+
+# removes files in satus in case still existing
+rm -rf ".shrug/branch/master/status/*"
+status=".shrug/branch/master/status/"
+
+# Retrieves all files needed for status. 
+# Removed
+# current index
+# current working tree
+cp -ar $path/removed/. $status
+cp -ar $path/index/. $status
+
+for checkFile in $status/*; do 
+    # copy file
+    cpyFile=$(basename $checkFile)
+
+    ### doesn't exist somehow or is untracked ###
+
+    # File has been deleted by user but is still staged
+    if [ ! -f "$cpyFile" ]; then
+        if [ -f "$path/staged/$-uyFile" ]; then
+            # file has been staged for commit but deleted by user
+            echo "$cpyFile $status6, file deleted"
+        else 
+            # file is gone and has not been committed
+            echo "$cpyfile $status1"
+        fi
+
+    # file exists but removed via shrug-rm
+    elif [ -f "path/removed/$cpyFile" ]; then
+        
+        if [ -f "$cpyFile" ]; then
+            # file has been deleted via shrug-rm as it exists in working dir
+            echo "$cpyFile $status0"
+        else 
+            # file is gone and not cached anywhere
+            echo "$cpyFile $status1"
+        fi
+    
+    # file is untracked as it is not in the index
+    # catches all other deletes
+    elif [ ! -f "$path/index/$cpyFile" ]; then
+        echo "$cpyFile $status0"
+
+    ### File exists in the index and is being tracked ###
+
+    # file has never been commited
+    elif [ ! -f "$path/latest/$cpyFile" ]; then
+			echo "$cpyFile $status3"
+
+    # file has been staged and previously committed
+    elif [ -f "$path/staged/$cpyFile" ]; then
+        # if file has been changed
+        if ! cmp -s "$cpyFile" "$path/staged/$cpyFile"; then
+            # user has changed the file before committing
+            echo "$cpyFile $status4"
+        else 
+            # user has not changed file and has yet to commit changes
+            echo "$cpyFile $status6"
+        fi
+
+    # File has not been staged and previously committed
+    elif cmp -s "$cpyFile" "$path/latest/$cpyFile"; then
+        # no changes have been made
+        echo "$cpyFile $status7"
+    else 
+        # changes have been made but not staged for commit
+        echo "$cpyFile $status5"
+    fi
+
+done
+
+    
+

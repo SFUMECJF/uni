@@ -1,0 +1,2 @@
+part2Q2B  
+Adaptor Pattern. Assuming that the user needs to change data from JSON to XML and has NO access to its source code.

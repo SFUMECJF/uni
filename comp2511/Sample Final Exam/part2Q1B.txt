@@ -1,0 +1,1 @@
+When the code is run, it prints "Statement for NOVEMBER" instead of "Statement for NOVEMBER \n Month access fee is"... due to the fact that the function printStatementHeader() is repeated twice within the parent class Account and the extended class SavingsAccount, where in the extended account, it does not override.

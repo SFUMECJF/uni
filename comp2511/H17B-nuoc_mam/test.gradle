@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'application'
+    id 'jacoco'
+}
+
+dependencies {
+    implementation files('lib/json.jar')
+    implementation files('lib/symlink_javafx/javafx.base.jar')
+    implementation files('lib/symlink_javafx/javafx.controls.jar')
+    implementation files('lib/symlink_javafx/javafx.fxml.jar')
+    implementation files('lib/symlink_javafx/javafx.graphics.jar')
+    implementation files('lib/symlink_javafx/javafx.swt.jar')
+    implementation files('lib/symlink_javafx/javafx.media.jar')
+    implementation files('lib/symlink_javafx/javafx.swing.jar')
+    implementation files('lib/symlink_javafx/javafx.web.jar')
+    testImplementation files('lib/symlink_junit5/junit-platform-console-standalone-1.7.0-M1.jar')
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect { // ** is for all matching directories. Single * is for all matching characters
+            fileTree(dir: it, exclude: [
+                                        '**/loader/**', // Loader doesn't need to be tested as if assets are working, they are there
+                                        '**/controller/**', // Controller isn't tested as if assets are working they are too
+                                        '**/DungeonApplication.*']) // Testing starting the dungeon would be useless
+        }))
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+group 'unsw.dungeon'
+
+apply plugin: 'java'
+
+sourceSets.test.java.srcDirs = ['src']
+sourceSets.test.java.excludes = ['unsw/dungeon/*']
+sourceSets.main.java.srcDirs = ['src']
+sourceSets.main.java.excludes = ['test/*']

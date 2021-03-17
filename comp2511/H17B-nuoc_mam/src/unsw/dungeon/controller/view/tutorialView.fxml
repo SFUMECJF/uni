@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" prefHeight="560.0" prefWidth="1024.0" spacing="25.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="560.0" prefWidth="275.0">
+         <children>
+            <Label text="HOW TO PLAY">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label prefHeight="87.0" prefWidth="238.0" text="1. Control your Player by using the arrow keys: UP, DOWN, LEFT or RIGHT." wrapText="true">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="87.0" prefWidth="238.0" text="2. Move the player over objects to collect items to see what they do!" wrapText="true">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="97.0" prefHeight="87.0" prefWidth="238.0" text="3. Complete the goals to finish the dungeon!" wrapText="true">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label text="Goals" />
+                  <Label prefWidth="238.0" text="&gt; Escape to the Exit" wrapText="true">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleOnBackBtn" text="Back" />
+         </children>
+      </VBox>
+      <GridPane fx:id="squares" maxHeight="-Infinity" maxWidth="-Infinity">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <VBox alignment="TOP_CENTER" prefHeight="560.0" prefWidth="210.0">
+         <children>
+            <Label text="Inventory">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+            <HBox prefHeight="100.0">
+               <children>
+                  <Label prefHeight="87.0" prefWidth="238.0" text="Treasure:" wrapText="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="treasureLbl" prefHeight="87.0" prefWidth="238.0" text="0" wrapText="true">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0">
+               <children>
+                  <Label prefHeight="87.0" prefWidth="238.0" text="Sword uses:" wrapText="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="swordLbl" prefHeight="87.0" prefWidth="238.0" text="0" wrapText="true">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>

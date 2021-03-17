@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+my $filename = '';
+
+my $arg = '';
+
+foreach $arg (@ARGV) {
+    if ($arg =~ /.json$/) {
+        $filename = $arg;
+    }
+}
+
+open my $whales, $filename or die "$filename cannot be opened\n";
+
+my $total = 0;
+
+while (my $whale = <$whales>) {
+    if ($whale =~ /"species" : "(.*)"/i) {
+        if ($1 == $ARGV[0]) {
+            $total += 1;
+        }
+    }
+}
+
+print ("$total\n";

@@ -1,0 +1,91 @@
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+{"status": "rejected"}
+{
+  "venue": "Zoo",
+  "rooms": ["Penguin"],
+  "status": "success"
+}
+{
+  "venue": "Zoo",
+  "rooms": ["Penguin"],
+  "status": "success"
+}
+[{
+  "reservations": [{
+    "start": "2019-03-24",
+    "end": "2019-03-27",
+    "id": "Room Filler"
+  }],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+{
+  "venue": "Foo",
+  "rooms": ["Penguin"],
+  "status": "success"
+}
+{
+  "venue": "Goo",
+  "rooms": ["Penguin"],
+  "status": "success"
+}
+{
+  "venue": "Woo",
+  "rooms": ["Penguin"],
+  "status": "success"
+}
+{"status": "rejected"}
+[{
+  "reservations": [],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [{
+    "start": "2019-03-24",
+    "end": "2019-03-27",
+    "id": "Spam Test"
+  }],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [{
+    "start": "2019-03-24",
+    "end": "2019-03-27",
+    "id": "Spam Test1"
+  }],
+  "room": "Penguin"
+}]
+[{
+  "reservations": [{
+    "start": "2019-03-24",
+    "end": "2019-03-27",
+    "id": "Spam Test2"
+  }],
+  "room": "Penguin"
+}]

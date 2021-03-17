@@ -1,0 +1,2 @@
+part2Q2A
+Observer pattern. This is assuming that Doctors and Nurses can change over time.

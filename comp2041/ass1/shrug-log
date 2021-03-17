@@ -1,0 +1,14 @@
+#!/bin/dash
+
+# Check for existing repo
+if [ ! -d .shrug ]; then 
+    echo "shrug-add: error: no .shrug directory containing shrug repository exists"
+    # exit with error
+    exit 1 
+fi
+
+path=".shrug/log"
+
+tac $path
+
+exit 1

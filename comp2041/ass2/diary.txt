@@ -1,0 +1,34 @@
+Diary for COMP2041 assignment 2
+Created by John Dao, z5258962.
+            j.dao@student.unsw.edu.au
+
+Due to issues with personal UNSW gateway and Vlab, I have chosen to use a personal repository on github to develop my work. Access can be requested with appropriate timestamps if requested. Will also link in this file below;
+https://github.com/jndao/COMP2041
+
+Date    Time Start  Time Stop   Description
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+6/8/20  9:00        12:00       Begun working on framework for ass2 sheeple and pushed starter code to github repo
+6/8/20  12:00       14:00       Continued to research for possible architecture to reduce if and else statements. Determine possible architecture for assignment. Decided on using packages with 'strict' and 'warning' packages
+6/8/20  14:00       20:00       Worked on subset0. aprox 50% working. Buggy but mostly operational
+7/8/20  9:00        14:30       Completed and debugged subset0. Now beginning subset1
+7/8/20  14:30       14:30       Ran autotests for subset0 and passing all
+7/8/20  15:00       18:00       Completed untested version of subset1
+7/8/20  19:00       20:00       Added comments. Clarified code and begun testing. Found bug with unrecognised char in read 
+7/8/20  20:00       20:30       Fixed bug and passing subset 0 and 1. Discovered that some refactoring will be needed to support subset 3 and 4
+7/8/20  20:30       21:00       Added nesting ability for subset 2 and 3. Removed dependancy of Subset0 from Subset1
+7/8/20  21:00       21:00       Autotest and found 'too early to check prototype' error and fixed it
+8/8/20  12:00       13:30       Completed untested Subset2
+8/8/20  13:30       13:30       Ran tests and passing 3/5. Found bug with syntax and syntax error at tmp.pm?
+8/8/20  13:30       14:00       Fixed bugs for all subsets. Passing 11/11. ran test for subset3 and passing 1/4
+8/8/20  14:00       15:00       Completed untested subset3
+8/8/20  15:00       15:00       Ran tests and passing 1/4 :( debugging beginning
+8/8/20  15:00       16:00       Debug for subset 3. Running 4/4
+8/8/20  16:00       16:00       Ran tests for subsets 0-3. Running at 15/15! passing 1/3 for subset4
+9/8/20  16:00(8th)  03:30       Completed untested subset4. had to change code in all subsets for unchanged success in other subsets
+9/8/20  03:30       03:30       Ran tests for subsets4. passing 4/4
+9/8/20  03:30       03:30       Ran tests for all subsets. passing 17/18. began debugging
+9/8/20  03:35       03:35       Finished debugging. ran tests for all subsets. Passing 18/18!! :)) Have not implemented all functions for seires.sh. Only rm
+9/8/20  03:35       04:35       Cleaned up code and begun writing tests for submission
+9/8/20  04:35       04:40       Pushed code and checked for any debugs. RAN TESTS AT 18/18
+9/8/20  04:40       04:45       Checked code style and getting ready for submission. Ran tests and passing at 18/18
+9/8/20  04:45       submission  added demo files and finished final checks for submission. Submitted after confirmed ok

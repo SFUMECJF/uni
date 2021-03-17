@@ -1,0 +1,24 @@
+{ "command": "room", "venue": "Zoo", "room": "Penguin", "size": "small" }
+{ "command": "room", "venue": "Foo", "room": "Penguin", "size": "small" }
+{ "command": "room", "venue": "Goo", "room": "Penguin", "size": "small" }
+{ "command": "room", "venue": "Woo", "room": "Penguin", "size": "small" }
+{ "command": "list", "venue": "Zoo" }
+{ "command": "list", "venue": "Foo" }
+{ "command": "list", "venue": "Goo" }
+{ "command": "list", "venue": "Woo" }
+{ "command": "request", "id": "Room Filler", "start": "2019-03-24", "end": "2019-03-27", "small": 4, "medium": 0, "large": 0 }
+{ "command": "request", "id": "Room Filler", "start": "2019-03-24", "end": "2019-03-27", "small": 1, "medium": 0, "large": 0 }
+{ "command": "change", "id": "Room Filler", "start": "2019-03-24", "end": "2019-03-27", "small": 1, "medium": 0, "large": 0 }
+{ "command": "list", "venue": "Zoo" }
+{ "command": "list", "venue": "Foo" }
+{ "command": "list", "venue": "Goo" }
+{ "command": "list", "venue": "Woo" }
+{ "command": "request", "id": "Spam Test", "start": "2019-03-24", "end": "2019-03-27", "small": 1, "medium": 0, "large": 0 }
+{ "command": "request", "id": "Spam Test1", "start": "2019-03-24", "end": "2019-03-27", "small": 1, "medium": 0, "large": 0 }
+{ "command": "request", "id": "Spam Test2", "start": "2019-03-24", "end": "2019-03-27", "small": 1, "medium": 0, "large": 0 }
+{ "command": "request", "id": "Spam Test3", "start": "2019-03-24", "end": "2019-03-27", "small": 1, "medium": 0, "large": 0 }
+{ "command": "cancel", "id": "Room Filler" }
+{ "command": "list", "venue": "Zoo" }
+{ "command": "list", "venue": "Foo" }
+{ "command": "list", "venue": "Goo" }
+{ "command": "list", "venue": "Woo" }

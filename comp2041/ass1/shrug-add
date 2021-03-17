@@ -1,0 +1,44 @@
+#!/bin/dash
+
+# Check for existing repo
+if [ ! -d .shrug ]; then 
+    echo "shrug-add: error: no .shrug directory containing shrug repository exists"
+    # exit with error
+    exit 1 
+fi
+
+# Get branch for storage in master
+path=".shrug/branch/master"
+
+# check for non existant file before adding changes
+for checkFile in "$@"; do
+        # Exit if file doesn't exist in repo or in root directory. 
+        # Exits before any changes are staged.z
+    if [ ! -f "$checkFile" ] && [ ! -f "$path/index/"$checkFile"" ]; then 
+        echo "shrug-add: error: can not open 'non_existent_file'"
+        exit 1
+    fi
+
+done
+
+# adds files to index directory in master branch
+# adds to staged if there have been any changes
+for afile in "$@"; do
+
+    # if file is deleted, will remove file from index
+    if [ ! -f "$afile" ]; then  
+        mv "$path/index/$afile" "$path/removed/"
+        continue
+    fi
+
+    # adding files to index
+    cp "$afile" "$path/index/"
+
+    # Will add to staged files if changes have been made or has never existed
+    if [ ! -f "$path/last/$afile" ] || !(cmp -s "$afile" "$path/last/$afile"); then
+        cp "$afile" "$path/staged/"
+    else 
+        rm -rf "$path/staged/$afile"
+    fi
+    
+done

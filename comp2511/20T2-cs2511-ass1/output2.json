@@ -1,0 +1,47 @@
+{
+  "venue": "Zoo",
+  "rooms": ["Penguin"],
+  "status": "success"
+}
+{
+  "venue": "Zoo",
+  "rooms": ["mediumPenguin"],
+  "status": "success"
+}
+{
+  "venue": "Zoo",
+  "rooms": ["largePenguin"],
+  "status": "success"
+}
+[
+  {
+    "reservations": [],
+    "room": "Penguin"
+  },
+  {
+    "reservations": [],
+    "room": "mediumPenguin"
+  },
+  {
+    "reservations": [{
+      "start": "2019-03-01",
+      "end": "2019-03-02",
+      "id": "indecisive"
+    }],
+    "room": "largePenguin"
+  }
+]
+[
+  {
+    "reservations": [],
+    "room": "Penguin"
+  },
+  {
+    "reservations": [],
+    "room": "mediumPenguin"
+  },
+  {
+    "reservations": [],
+    "room": "largePenguin"
+  }
+]

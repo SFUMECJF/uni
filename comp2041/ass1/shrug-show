@@ -1,0 +1,41 @@
+#!/bin/dash
+
+# Check for existing repo
+if [ ! -d .shrug ]; then 
+    echo "shrug-add: error: no .shrug directory containing shrug repository exists"
+    # exit with error
+    exit 1 
+fi
+
+# Get path for master directory and arguments used
+path=".shrug/branch/master"
+argument=$1
+
+commitNum=$(echo $argument | cut -d ":" -f1)
+fileN=$(echo $argument | cut -d ":" -f2)
+
+# If commit is omitted
+if [ -z "$commitNum" ]; then
+    # if file does not exist in index
+    if [ ! -f "$path/index/$fileN" ]; then
+        echo "shrug-show: error: '$fileN' not found in index"
+        exit 1
+    else 
+        cat "$path/index/$fileN"
+    fi
+
+# if commit is given, will concatenate
+else 
+    # file not found
+    if [ ! -d "$path/$commitNum" ]; then 
+        echo "shrug-show: error: unknown commit '$commitNum'"
+        exit 1
+    # commit not found
+    elif [ ! -f "$path/$commitNum/$fileN" ]; then
+        echo "shrug-show: error: '$fileN' not found in commit $commitNum"
+        exit 1
+    else 
+        cat "$path/$commitNum/$fileN"  
+    fi
+    
+fi

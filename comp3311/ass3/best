@@ -1,0 +1,57 @@
+#!/usr/bin/python3
+# COMP3311 20T3 Ass3 ... print name, year, ratings of top N movies
+# by John Dao z5258962
+# November 2020 20T2
+
+import sys
+import psycopg2
+
+#from helpers import whatever, functions, you, need
+
+# define any local helper functions here
+
+# set up some globals
+
+usage = "Usage: best [N]"
+db = None
+
+# process command-line args
+
+# default is 10
+valN = 10
+
+argc = len(sys.argv)
+
+# if field is not empty, then input is taken as override
+if argc != 1:
+  if not sys.argv[1].isdigit() or sys.argv[1] == '0':
+    print (usage)
+    exit()
+  else:
+    valN = sys.argv[1]
+
+
+# manipulate database
+
+try:
+  db = psycopg2.connect("dbname=imdb")
+  # ... add your code here ...
+  cur = db.cursor()
+  # retrieves all movies and sorts by rating. Limits to input or default
+  cur.execute("SELECT rating, title, start_year\
+               FROM movies\
+               ORDER BY rating DESC, title, start_year\
+               limit %s" % valN)
+  
+  # prints all movies based on rating
+  for movie in cur.fetchall(): 
+    rating, title, start_year = movie
+    print (rating, title, '(%s)' % start_year)
+    
+    
+except psycopg2.Error as err:
+  print("DB error: ", err)
+finally:
+  if db:
+    db.close()
+

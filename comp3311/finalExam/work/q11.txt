@@ -1,0 +1,18 @@
+# COMP3311 20T3 Final Exam Q11
+
+(a)
+
+    aTable(a, b, c) = Proj[a, b, c](Sel[]R)
+
+(b)
+
+    bTable(a, b) = Proj[a, b](Sel[c < 5]R)
+
+(c)
+
+    cTable(a, d) = Proj[a, d](Sel[c < 0](R join [b = e] S)
+
+(d)
+
+    dTable(b, c, e, f) = Proj[b, c, e, f](Sel[]((R x T) x S))
+
