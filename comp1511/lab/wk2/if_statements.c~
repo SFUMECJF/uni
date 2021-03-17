@@ -1,0 +1,19 @@
+//Defining positive and negative numbers
+//John Dao 11/6/19
+
+#include <stdio.h>
+
+int main (void){
+    int number;
+    printf("Please enter a number to define if positive or negative: ");
+    scanf("%d", &number);
+    if (number > 0){
+        printf("You have entered a positive number.\n");
+    } else if (number < 0){
+        printf("You have entered a negative number. \n");
+    } else 
+        printf("You have entered zero.\n");
+
+    return 0;
+}
+

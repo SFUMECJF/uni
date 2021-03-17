@@ -1,0 +1,16 @@
+//This program is a tester for random programs
+//John Dao Aug 2019
+
+#include <stdio.h> 
+
+int main (void) {
+    int numOne = 5;
+    printf("Enter a number: ");
+    scanf("%d", &numOne);
+    
+    while (numOne > 0) {
+        printf("%d", numOne);
+    }
+    
+    return 0;
+}

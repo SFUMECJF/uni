@@ -1,0 +1,12 @@
+#include <stdio.h>
+int main (void) {
+    int numOne;
+    int numTwo;
+    int result;
+    scanf("%d %d", &numOne, &numTwo);
+    
+    result = ((numOne > numTwo) * (numOne) +  (numTwo > numOne) * (numTwo))*(numOne == numTwo)*2 *1/4;
+    printf("%d", result);
+    
+    return 0;
+}

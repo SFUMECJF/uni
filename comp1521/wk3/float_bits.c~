@@ -1,0 +1,80 @@
+// Extract the 3 parts of a float using bit operations only
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <assert.h>
+
+#include "floats.h"
+
+#define N_BITS = 32
+
+// separate out the 3 components of a float
+float_components_t float_bits(uint32_t f) {
+    //Initiating 3 components of a float
+    //They are: sign, exponent and fraction;
+    int32_t sign;
+    int32_t exponent;
+    int32_t fraction;
+    int counter = 0;
+    
+    while (counter < 32) {
+        //sign assignment
+        if (counter == 31) {
+            sign = sign << 1;
+            sign = sign|f; 
+        //exponent assignment
+        } else if (counter > 23 && counter < 31) {
+            fraction = fraction << 1;
+            fraction = fraction|f;
+        //fraction assignment
+        } else if (counter > 0 && counter < 23) {
+            exponent = exponent << 1;
+            exponent = exponent|f;
+        }
+        counter++;
+    }
+    return 0;
+}
+
+
+// given the 3 components of a float
+// return 1 if it is NaN, 0 otherwise
+int is_nan(float_components_t f) {
+    int stub = 0;
+
+    if (f.fraction != f.fraction) {
+        stub = 1;
+    }
+
+    return stub;
+}
+
+
+// given the 3 components of a float
+// return 1 if it is inf, 0 otherwise
+int is_positive_infinity(float_components_t f) {
+
+    
+    return 42;
+}
+
+
+// given the 3 components of a float
+// return 1 if it is -inf, 0 otherwise
+int is_negative_infinity(float_components_t f) {
+
+    // PUT YOUR CODE HERE
+
+    return 42;
+}
+
+
+// given the 3 components of a float
+// return 1 if it is 0 or -0, 0 otherwise
+int is_zero(float_components_t f) {
+
+    // PUT YOUR CODE HERE
+
+    return 42;
+}
