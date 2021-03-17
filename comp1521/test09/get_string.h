@@ -1,1 +1,0 @@
-/web/cs1521/19T3/activities/get_string/files.ln/get_string.h

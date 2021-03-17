@@ -1,1 +1,0 @@
-/web/cs1521/19T3/activities/min/files.ln/min.c
