@@ -1,0 +1,3 @@
+## Overview
+* The main focus on this iteration is the refactor of our code. In this process, we found out that there are several design smells. After we spot the design smells, we applied SE principles, DRY and KISS method to refactor our code to make it more maintainable.
+
