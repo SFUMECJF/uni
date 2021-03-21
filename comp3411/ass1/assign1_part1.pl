@@ -107,6 +107,6 @@ eval(div(A, B), V) :-
     eval(A, Temp1),
     eval(B, Temp2),
     (Temp2 =\= 0 -> V is (Temp1 / Temp2);
-        (Temp2 =:= 0 -> write('Cannot divide by zero!'); break
+        (Temp2 =:= 0 -> write('Cannot divide by zero!'); break % divide by zero check
         )
     ).
