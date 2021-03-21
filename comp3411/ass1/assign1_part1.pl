@@ -95,13 +95,13 @@ eval(sub(A, B), V) :-
     eval(A, Temp1),
     eval(B, Temp2),
     V is Temp1 - Temp2.
-
+% multiply
 eval(mul(A, B), V) :-
     % recursively call on both A and B to make sure nested functions are run
     eval(A, Temp1),
     eval(B, Temp2),
     V is Temp1 * Temp2.
-
+% divide
 eval(div(A, B), V) :-
     % recursively call on both A and B to make sure nested functions are run
     % with divide by zero check
