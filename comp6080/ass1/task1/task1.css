@@ -1,0 +1,57 @@
+body {
+    height: 883px;
+    width: 1219px;
+    max-width: 1219px;
+    max-height: 883px;
+    font-family: Arial;
+    line-height: 150%;
+}
+
+
+.koalaBox {
+    width: 257px;
+    height: 150px;
+    background-color: #EEEEEE;
+    float: right;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-left: 25px;
+    margin-left: 18px;
+    color: #6C6967;
+}
+
+.koalaInfo {
+    line-height: 40px; 
+    font-size:25px; 
+    font-weight: bold; 
+    padding-top: 50px;
+    letter-spacing: 1px;
+}
+
+.koalaClass {
+    line-height: 30px;
+    font-size: 18px;
+}
+
+.sceneBox {
+    background-color: #F3CD4A;
+    width: 250px;
+    height: 45px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px; 
+    margin-left: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.headerText {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.textBody {
+    margin-left: 50px;
+    font-size: 19px;
+    line-height: 28px;
+}

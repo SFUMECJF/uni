@@ -1,0 +1,250 @@
+/*
+    MAIN BODY AND CONTENT CLASSES
+*/
+
+/* applies features over the entire webpage inclusive of all
+properties
+*/
+
+body {
+    background-color: #F8F8F8;
+    background-repeat: no-repeat;
+    font-family: Arial;
+    text-align: center;
+    margin:0 auto;
+    width: 60%;
+    height: 100%;
+    min-width: 419px;
+    max-width: 1894px;
+    min-height: 1470px;
+    max-height: 3195px;
+}
+
+/* header for the entire webpage */
+.header {
+    margin:0 auto;
+    font-size: 300%;
+    font-weight: bold;
+    line-height: 120%;
+    padding-top: 1%;
+}
+
+.features {
+    padding-top: 20%;
+    padding-bottom: 10%;
+}
+/* Container for all the features of the service */
+.featureContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center ;
+    justify-content: center;
+    flex-direction: row;
+}
+
+/* container for all feature components */
+.componentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 33.333333%;
+    padding-bottom: 10%;
+}
+
+.featureImage {
+    width: 200px;
+    height: 300px;
+}
+
+/* Given that the class is componentContainer, will decrease opacity when hovered */
+.componentContainer:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+/* default h2 settings */
+.featureHeader {
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+.featureText {
+    font-size: 1.25em;
+}
+/*
+    AD BOX CLASSES
+*/
+
+/* Container for the banner ad */
+.adContainer {
+    bottom: 0;
+    left: 20%;
+    margin:0 auto;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+}
+
+/* makes a yellow background with padding around */
+.yellow {
+    background-color: #FFFF70;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+/* ad header. Created new class in case of editing */
+.adHeader {
+    font-size: 215%;
+}
+
+/* Container for the information within the ad container */
+.adInfoContainer {
+    width: 60%;
+    float: left;
+}
+
+/* ad text. Cared classes in case of editing and to seperate css */
+.adText {
+    font-size: 150%;
+    line-height: 160%;
+}
+
+/* The container for all of the store logos */
+.storeContainer {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    flex-direction: row;
+}
+
+/* specifications for the apple store logo */
+.appleStoreLogo {
+    width: 45%;
+    height: 15%;
+}
+
+/* specifications for the play store logo */
+.playStoreLogo {
+    width: 45%;
+    height: 15%;
+    padding: 10px;
+}
+
+/* for the UNSW ROX and its purple outfit */
+.unswRox {
+    background-color: #8E42FF;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Hover function for the unswROX code */
+.unswRox:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+/* Mini size for the offer avaliable for a limited time */
+.offer {
+    font-size: 100%;
+    padding-bottom: 10px;
+    line-height: 40px;
+}
+
+/* Functions that change the outlay of the page given the dimensions are small enough 
+    helps to smoothly transition from large to small (also one for mobile)
+*/
+@media (max-device-width: 867px) {
+    body {
+        width: 90%;
+    }
+
+    .header {
+        padding-top: 5%;
+        font-size: 500%;
+
+    }
+
+    .featureContainer {
+        flex-direction: column;
+        font-size: 80%;
+
+    }
+
+    .featureImage {
+        width: 50%;
+        height: 50%; 
+        padding-bottom: 10%;
+    }
+
+    .featureHeader {
+        font-size: 5em;
+    }
+
+    .featureText {
+        font-size: 3em;
+    }
+    .componentContainer {
+        padding-bottom: 40%;
+        
+    }
+
+    .adContainer {
+        width: 100%;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .adHeader {
+        font-size: 800%;
+    }
+
+    .adInfoContainer {
+        width: 100%;
+        font-size: 300%;
+        padding-bottom: 10%;
+    }
+
+    .storeContainer {
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .adText {
+        font-size: 150%;
+        padding: 2%;
+    }
+
+    .offer {
+        padding: 5%;
+    }
+
+    .unswRox {
+        padding: 2%;
+        border-radius: 5%;
+    }
+
+    /* specifications for the apple store logo */
+    .appleStoreLogo {
+        width: 60%;
+        height: 20%;
+    }
+
+    /* specifications for the play store logo */
+    .playStoreLogo {
+        width: 60%;
+        height: 20%;
+        padding: 7%;
+    }
+}

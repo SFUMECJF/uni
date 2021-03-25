@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<script type="text/javascript" src="task4.js"></script>
+
+<style> 
+    table, th, td {
+        border: 1px solid black;
+        align-items: left;
+        text-align: left;
+    }
+
+    p {
+        margin:0;
+        padding:0;
+    }
+    span {
+        float: left;
+    }
+
+</style>
+
+<table>
+    <tr>
+        <th><label for="streetName">Street Name</label></th>
+        <th><input type="text" id="streetName" name="streetName" onblur="checkAll()"></th>
+    </tr>
+        
+    <tr>
+        <th><label for="subName">Suburb</label></th>
+        <th><input type="text" id="subName" name="subName" onblur="checkAll()" ></th>
+        
+    </tr>
+        <th><label for="postcode">Postcode</label></th>
+        <th><input type="text" id="postcode" name="postcode" onblur="checkAll()"></th>
+    <tr>
+        <th><label for="dob">Date of birth</label></th>
+        <th><input type="text" id="dob" name="dob" onblur="checkAll()"></th>
+    </tr>
+
+    <tr>
+        <th><label for="bType">Building Type</label></th>
+        <th style="float: left;">
+            <select id="bType" onclick="checkAll()">
+                <option value="0" ">Apartment</option>
+                <option value="1"">House</option>
+            </select>
+        </th>
+    </tr>
+
+    <tr>
+        <th><label for="features">Features</label></th>
+        <th>
+            <div>
+                <input type="checkbox" id="f0" name="heating" onclick="checkAll()">
+                <label for="f0">Heating</label>
+            </div>
+            <div>
+                <input type="checkbox" id="f1" name="air conditioning" onclick="checkAll()">
+                <label for="f1">Air Conditioning</label>
+            </div>
+            <div>
+                <input type="checkbox" id="f2" name="pool" onclick="checkAll()">
+                <label for="f2">Pool</label>
+            </div>
+            <div> 
+                <input type="checkbox" id="f3" name="sand pit" onclick="checkAll()">
+                <label for="f3">Sandpit</label>
+            </div>
+
+            <button id="tickAll" onclick="tickAll()">Select All</button>
+            
+        </th>   
+        
+    </tr>
+
+
+</table>
+
+<br><button id="resetButton" onclick="resetAll()">Reset</button><br><br>
+
+<textarea id="resultBox" name="resultBox" rows = "10" cols ="38" readonly></textarea>
+</body>
+</html>

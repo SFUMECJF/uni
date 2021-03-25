@@ -1,0 +1,51 @@
+body {
+    width: 420px;
+    height: 699px;
+    background: repeating-linear-gradient(
+        90deg,
+        #091B2D,
+        #091B2D 35px,
+        #0D253F 35px,
+        #0D253F 70px
+    );
+    background-size: 420px 699px;
+    background-repeat: no-repeat;
+}
+
+.tetrisTable {
+    position: absolute;
+    border: none;
+
+}
+
+.redBox {
+    background-color: #E94659;
+    border-radius: 2px;
+    overflow:hidden;
+    width: 31px;
+    height: 31px;
+    border: 1px solid #0D253F;
+    border-radius: 4px;
+}
+
+.purpBox {
+    background-color: #A981FE;
+    border-radius: 1px;
+    overflow:hidden;
+    width: 31px;
+    height: 31px;
+    border: 1px solid #0D253F;
+    border-radius: 3px;
+}
+
+.whiteTri {
+    position: relative;
+    top: 5.5px;
+    left: 1px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 0;
+    border-color: white transparent transparent transparent;
+
+}
