@@ -29,3 +29,54 @@ export function fileToDataUrl(file) {
     reader.readAsDataURL(file);
     return dataUrlPromise;
 }
+/**
+ * Creates a modal popup that covers the entire screen
+ * @param {String} title 
+ * @param {String} content 
+ */
+export function showModal(title, content) {
+    let modal = document.getElementById('modalContainer');
+
+    while (modal.hasChildNodes()) {
+        modal.removeChild(modal.childNodes[0]);
+    }
+
+    // new header
+    let newTitle = document.createElement('h3');
+    newTitle.appendChild(document.createTextNode(title));
+
+    // new content
+    let newContent = document.createElement('div');
+    newContent.appendChild(document.createTextNode(content));
+    newContent.style.paddingBottom = "10%"
+
+    // close button
+    let newButton = document.createElement('button');
+    newButton.appendChild(document.createTextNode("Close"));
+    //newButton.setAttribute('class', submitButton);
+
+    modal.appendChild(newTitle);
+    modal.appendChild(newContent);
+    modal.appendChild(newButton);
+    // show modal
+    modal.style.display = 'block';
+
+    // if the user clicks close then will close modal
+    newButton.addEventListener('click', event => {
+        event.preventDefault();
+        modal.style.display = 'none';
+    });
+
+    // closes modal if clicks outside of box
+    window.addEventListener('click', event => {
+        if (!event.target.closest(".modal") || event.target.closest("")) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+// plucked from somwhere in the web
+export function checkEmail(email) { 
+    var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+} 

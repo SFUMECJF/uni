@@ -22,4 +22,21 @@ export default class API {
     makeAPIRequest(path) {
         return getJSON(`${this.url}/${path}`);
     }
+
+    /**
+     * authentication used for login and signup 
+     * @param {String} path
+     * @param {JSON} requestData
+     */
+    auth(path, requestData) {
+        const data = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        }
+
+        return fetch(`${this.url}/${path}`, data);
+    }
 }

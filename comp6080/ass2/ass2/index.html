@@ -9,18 +9,74 @@
     <link rel="stylesheet" type="text/css" media="screen" href="styles/provided.css" />
     <script type="module" src="src/helpers.js"></script>
     <script type="module" src="src/api.js"></script>
+    <script type="module" src="src/main.js"></script>
 </head>
 <body>
     <!-- This is an example app structure, you can modify this as much as you choose --> 
+    
     <header class="banner">
         <h1>Quickpic</h1>
         <ul class="nav">
-            <li class="nav-item">Item</li>
-            <li class="nav-item">Item</li>
+            <button class="nav-item">Item</button>
+            <button class="nav-item">Item</button>
         </ul>
     </header>
     <main role="main">
         <!-- app goes here --> 
+        <div class="modal modal-zoom no-display" name="modal" id="modalContainer">
+            <h1 id="modalTitle"></h1>
+            <div id="modalContent"></div>
+        </div>
+
+        <!-- Basic Login Form with username, password and submit entries as well as a register. No autofil because it annoys me rn-->
+        <div class="form-container" id="login">
+            <h4>Log In</h4>
+            <form class="login-content" name="loginForm" id="loginForm" autocomplete="off">
+            
+                <label for="username">Username</label>
+                <input type="text" placeholder="Enter Username" id="loginUsername"/>
+    
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter Password" id="loginPassword"/>
+                
+                <!--Submit with login and with enter!-->
+                <button class="nav-item" type="submit">Login</button>
+                <button class="nav-item" id="signupButton">Sign Up</button>
+                <input type="submit" style="visibility: hidden;" />
+    
+            </form>
+        </div>
+
+        <!-- Basic signup form-->
+        <div class="form-container" name="signup" id="signup">
+            <h4>Sign Up</h4>
+            <form class="signup-content" name="signupForm" id="signupForm">
+                <label for="signupUsername">Username</label>
+                <input type="text" placeholder="Enter Username" id="signupUsername"/>
+
+                <label for="signupPassword">Password</label>
+                <input type="password" placeholder="Enter Password" id="signupPassword"/>
+
+                <label for="signupConfirmPassword">Confirm Password</label>
+                <input type="password" placeholder="Confirm Password" id="signupConfirmPassword"/>
+
+                <label for="signupEmail">Email</label>
+                <input type="text" placeholder="Enter Email" id="signupEmail"/>
+                
+                <label for="signupName">Name</label>
+                <input type="name" placeholder="Enter Name" id="signupName"/>
+
+                <button class="nav-item" type="submit">Submit</button>
+            </form>
+            
+        </div>
+        <!-- Feed signup form-->
+        <div class="feed-container" name="feed" id="feed">
+            Not yet implemented
+        </div>
+
+        
+        
     </main>
     <footer>
         <p>&copy; Quickpic</p>
