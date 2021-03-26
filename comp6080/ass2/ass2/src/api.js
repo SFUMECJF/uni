@@ -33,6 +33,7 @@ export default class API {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
+                
             },
             body: JSON.stringify(requestData)
         }
@@ -40,5 +41,16 @@ export default class API {
         return fetch(`${this.url}/${path}`, data);
     }
 
+    get(path, token) {
+        const data = {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`
+            },
+        }
+
+        return fetch(`${this.url}/${path}`, data);
+    }
     
 }

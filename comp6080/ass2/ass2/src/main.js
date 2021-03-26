@@ -16,7 +16,7 @@ const login = document.getElementById('login'),
     loginForm = document.getElementById('loginForm'),
     signup = document.getElementById('signup'),
     signupForm = document.getElementById('signupForm'),
-    feed = document.getElementById('feed'),
+    feed = document.getElementById('feedContainer'),
     signupButton = document.getElementById('signupButton'),
     nav = document.getElementById('nav'),
     logout = document.getElementById('logout'),
@@ -26,8 +26,10 @@ const login = document.getElementById('login'),
 if (localStorage.getItem('token') !== null) {
     feed.style.display = 'flex';
     nav.style.display = 'inline';
+    getNewFeed(api);
 
 } else {
+    logout.style.display = 'none';
     login.style.display = "block";
 }
 
@@ -56,7 +58,7 @@ login.addEventListener("submit", event => {
 
                         // show navigation only avaliable if logged in
                         nav.style.display = 'inline';
-                        getNewFeed();
+                        getNewFeed(api);
                     })
 
             // bad username/password

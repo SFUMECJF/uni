@@ -46,10 +46,12 @@ export function fileToDataUrl(file) {
  * @param {String} content 
  */
 export function showModal(title, content) {
-    let modal = document.getElementById('modalContainer');
-
-    removeChilds(modal);
-
+    const modal = document.getElementById('modalContainer');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent')
+    const closebutton = document.getElementById('modalClose')
+    removeChilds(modalTitle);
+    removeChilds(modalContent);
     // new header
     let newTitle = document.createElement('h3');
     newTitle.appendChild(document.createTextNode(title));
@@ -57,21 +59,20 @@ export function showModal(title, content) {
     // new content
     let newContent = document.createElement('div');
     newContent.appendChild(document.createTextNode(content));
-    newContent.style.paddingBottom = "10%"
 
     // close button
     let newButton = document.createElement('button');
     newButton.appendChild(document.createTextNode("Close"));
     //newButton.setAttribute('class', submitButton);
 
-    modal.appendChild(newTitle);
-    modal.appendChild(newContent);
-    modal.appendChild(newButton);
+    modalTitle.appendChild(newTitle);
+    modalContent.appendChild(newContent);
+
     // show modal
     modal.style.display = 'block';
 
     // if the user clicks close then will close modal
-    newButton.addEventListener('click', event => {
+    closebutton.addEventListener('click', event => {
         event.preventDefault();
         modal.style.display = 'none';
     });
