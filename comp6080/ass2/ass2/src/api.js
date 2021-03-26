@@ -41,7 +41,7 @@ export default class API {
         return fetch(`${this.url}/${path}`, data);
     }
 
-    get(path, token) {
+    getFeed(path) {
         const data = {
             method: 'GET',
             headers: {
@@ -52,5 +52,16 @@ export default class API {
 
         return fetch(`${this.url}/${path}`, data);
     }
-    
+    getUsernameById(id) {
+        const data = {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+                'query': id
+            },
+        }
+
+        return fetch(`${this.url}/user?id=${id}`, data);
+    }
 }

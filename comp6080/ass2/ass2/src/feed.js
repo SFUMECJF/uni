@@ -1,24 +1,29 @@
 import API from './api.js';
-import { fileToDataUrl, showModal, changeContent, checkNewEmail, removeChilds} from './helpers.js';
+import { fileToDataUrl, showModal, checkNewEmail, removeChilds, createLikeList} from './helpers.js';
 
-const feed = document.getElementById('feedContainer');
 
 /**
  * Given an api will request for posts and add them to feed
  * @param {API} api 
  */
 export function getNewFeed(api) {
-    api.get('user/feed', localStorage.getItem('token'))
+    const feed = document.getElementById('feedContainer');
+    removeChilds(feed);
+    api.getFeed('user/feed', localStorage.getItem('token'))
         .then(response => response.json())
         .then(jsonResponse => {
             console.log(localStorage.getItem('token'));
             console.log(jsonResponse.posts);
             
-            if (jsonResponse.posts.length !== 0) {
-                removeChilds(feed);
+            if (jsonResponse.posts !== undefined) {
                 jsonResponse.posts.forEach(element => {
-                    addFeedContent(element);
+                    feed.appendChild(addFeedContent(element, api));
                 })
+            } else {
+                const followToSee = document.createElement('div');
+                followToSee.appendChild(document.createTextNode('follow to see content!'));
+                followToSee.style.textAlign = 'center';
+                feed.appendChild(followToSee);
             }
         })
 
@@ -32,8 +37,7 @@ export function getNewFeed(api) {
  * Given a post will add to feed
  * @param {JSON} element 
  */
-export function addFeedContent(element) {
-    const feedContainer = document.getElementById("feedContainer");
+export function addFeedContent(element, api) {
     const meta = element.meta;
     const post = {
         'author' : meta.author,
@@ -41,12 +45,14 @@ export function addFeedContent(element) {
         'srcImage' : `data:image/png;base64, ${element.src}`,
         'nLikes' : meta.likes.length,
         'description' : meta.description_text,
-        'nComments' : element.comments.length
+        'nComments' : element.comments.length,
+        'id': element.id
     }
 
     // new feed unit
     const feedUnit = document.createElement('div');
     feedUnit.setAttribute('class', 'card');
+    feedUnit.setAttribute('id', "postId" + post.id)
     
     // card header
     const feedHeader = document.createElement('div');
@@ -107,8 +113,6 @@ export function addFeedContent(element) {
 
     }
 
-
-
     // feed header
     feedHeader.appendChild(author);
     feedHeader.appendChild(postDate);
@@ -119,13 +123,40 @@ export function addFeedContent(element) {
     cardBody.appendChild(likes);
     cardBody.appendChild(comments);
 
+    // adding listeners
+    // like listener button to list
+    likes.addEventListener('click', event => {
+        event.preventDefault();
 
+        showModal("Likes", createLikeList(meta.likes, api));
+    })
 
+    comments.addEventListener('click', event => {
+        event.preventDefault();
+
+        if (post.nComments === 0) {
+            showModal("Comments", "Be the first to comment!");
+        } else {
+            const comments = element.comments
+            const commentList = document.createElement('ul');
+            let i = 0;
+            for (i = 0; i < comments.length; i++) {
+                let listComment = document.createElement('li');
+                let commentContent = document.createElement('div');
+                commentContent.appendChild(document.createTextNode(comments[i].author + ": " + comments[i].comment));
+                listComment.appendChild(commentContent);
+                commentList.appendChild(listComment);
+            }
+            showModal("Comments", commentList);
+        }
+    })
+    
+    
     // creating the card!
     // author + post date
     feedUnit.appendChild(feedHeader);
     // the entire body including
     // image, description, likes and comments
     feedUnit.appendChild(cardBody);
-    feed.appendChild(feedUnit);
+    return feedUnit
 }

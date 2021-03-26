@@ -1,6 +1,6 @@
 import API from './api.js';
 // A helper you may want to use when uploading new images to the server.
-import { fileToDataUrl, showModal, changeContent, checkNewEmail} from './helpers.js';
+import { fileToDataUrl, showModal, checkNewEmail} from './helpers.js';
 import {getNewFeed} from './feed.js'
 
 // This url may need to change depending on what port your backend is running
@@ -30,7 +30,7 @@ if (localStorage.getItem('token') !== null) {
 
 } else {
     feed.style.display = 'none';
-    logout.style.display = 'none';
+    nav.style.display = 'none';
     login.style.display = "block";
 }
 
@@ -52,6 +52,7 @@ login.addEventListener("submit", event => {
                     .then(token => {
                         // shows the feed and allows for logout. also sets token in localstorage
                         login.style.display = 'none';
+                        getNewFeed(api);
                         feed.style.display = 'flex';
 
                         // set token
@@ -59,7 +60,6 @@ login.addEventListener("submit", event => {
 
                         // show navigation only avaliable if logged in
                         nav.style.display = 'inline';
-                        getNewFeed(api);
                     })
 
             // bad username/password

@@ -43,7 +43,7 @@ export function fileToDataUrl(file) {
 /**
  * Creates a modal popup that covers the entire screen
  * @param {String} title 
- * @param {String} content 
+ * @param {String or HTMLElement} content 
  */
 export function showModal(title, content) {
     const modal = document.getElementById('modalContainer');
@@ -58,7 +58,11 @@ export function showModal(title, content) {
 
     // new content
     let newContent = document.createElement('div');
-    newContent.appendChild(document.createTextNode(content));
+    if (typeof content === 'string') {
+        newContent.appendChild(document.createTextNode(content));
+    } else {
+        newContent.appendChild(content);
+    }
 
     // close button
     let newButton = document.createElement('button');
@@ -76,28 +80,35 @@ export function showModal(title, content) {
         event.preventDefault();
         modal.style.display = 'none';
     });
-
-    /*
-    // closes modal if clicks outside of box
-    window.addEventListener('click', event => {
-        if (!event.target.closest(".modal") || event.target.closest("")) {
-            modal.style.display = 'none';
-        }
-    });
-    */
 }
 
 /**
- * Given a single element, will change the text content within
- * @param {HTMLElement} element 
- * @param {String} newContent 
+ * Creates a html like list out of all the likes in the list
+ * @param {Array} uidLikes 
  */
-export function changeContent(element, content) {
-    removeChilds(element);
-    var newContent = document.createElement('span');
+export function createLikeList(uidLikes, api) {
+    const nLikes = uidLikes.length;
 
-    newContent.appendChild(document.createTextNode(content));
-    element.appendChild(newContent);
+    console.log(uidLikes);
+    let likeList = document.createElement('ul');
+
+    let i = 0;
+    if (nLikes > 0) {
+        for (i = 0; i < nLikes; i++) {
+            api.getUsernameById(uidLikes[i])
+                .then(response => response.json())
+                .then(jsonResponse => {
+                    let listUser = document.createElement('li');
+                    listUser.appendChild(document.createTextNode(jsonResponse.username));
+                    likeList.appendChild(listUser);
+                })
+        }
+    } else {
+        likeList = document.createElement('div');
+        likeList.appendChild(document.createTextNode('No likes yet'))
+    }
+    
+    return likeList;
 }
 
 // checks if new email is valid
