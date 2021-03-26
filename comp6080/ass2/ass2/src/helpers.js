@@ -75,7 +75,22 @@ export function showModal(title, content) {
     });
 }
 
-// plucked from somwhere in the web
-export function checkEmail(email) { 
+/**
+ * Given a single element, will change the text content within
+ * @param {HTMLElement} element 
+ * @param {String} newContent 
+ */
+export function changeContent(element, content) {
+    while(element.hasChildNodes()) {
+        element.removeChild(element.childNodes[0]);
+    }
+    var newContent = document.createElement('span');
+
+    newContent.appendChild(document.createTextNode(content));
+    element.appendChild(newContent);
+}
+
+// checks if new email is valid
+export function checkNewEmail(newEmail) {
     return true;
-} 
+}

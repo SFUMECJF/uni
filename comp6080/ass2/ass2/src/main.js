@@ -1,11 +1,10 @@
 import API from './api.js';
 // A helper you may want to use when uploading new images to the server.
-import { fileToDataUrl, showModal, checkEmail} from './helpers.js';
+import { fileToDataUrl, showModal, changeContent, checkNewEmail} from './helpers.js';
 
 // This url may need to change depending on what port your backend is running
 // on.
 const api = new API('http://localhost:5000');
-
 
 // Example usage of makeAPIRequest method.
 //api.makeAPIRequest('dummy/user')
@@ -13,30 +12,57 @@ const api = new API('http://localhost:5000');
 
 // all getElement declarations
 const login = document.getElementById('login'),
+    loginForm = document.getElementById('loginForm'),
     signup = document.getElementById('signup'),
+    signupForm = document.getElementById('signupForm'),
     feed = document.getElementById('feed'),
-    registerButton = document.getElementById('registerbutton');
+    signupButton = document.getElementById('signupButton'),
+    nav = document.getElementById('nav'),
+    logout = document.getElementById('logout'),
+    toLogin = document.getElementById('toLogin');
 
-login.style.display = "block";
+
+if (localStorage.getItem('token') !== null) {
+    feed.style.display = 'flex';
+    nav.style.display = 'inline';
+
+} else {
+    login.style.display = "block";
+}
+
 
 // handles login attempt
 login.addEventListener("submit", event => {
     event.preventDefault();
+    // get request data
     const requestData = {
         'username': document.getElementById('loginUsername').value,
         'password': document.getElementById('loginPassword').value
     }
-    console.log(requestData)
+    
+    // request auth/login from api
     api.auth('auth/login', requestData)
         .then(response => {
             if (response.status === 200) {
-                login.style.display = 'none';
-                feed.style.display = 'flex';
+                response.json()
+                    .then(token => {
+                        // shows the feed and allows for logout. also sets token in localstorage
+                        login.style.display = 'none';
+                        feed.style.display = 'flex';
+
+                        // set token
+                        localStorage.setItem('token', token.token);
+
+                        // show navigation only avaliable if logged in
+                        nav.style.display = 'inline';
+                    })
+
+            // bad username/password
             } else if (response.status === 403) {
-                // bad username/password
                 showModal("Username/Password Invalid", "Please try again");
+            
+            // empty form
             } else if (response.status === 400) {
-                // empty form
                 showModal("Username/Password not found", "Please register if you do not have an account");
             }
         })
@@ -45,29 +71,25 @@ login.addEventListener("submit", event => {
         .catch(response => {
             console.log(response.message)
         })
-    
+    // reset login form
+    loginForm.reset();
 });
 
-// handles signup new user request to sign up
-document.getElementById('signupButton').addEventListener("click", event => {
-    event.preventDefault();
-    login.style.display = 'none';
-    signup.style.display = 'block';
-});
-
+// handles signup submit eevent
 signup.addEventListener('submit', event => {
     event.preventDefault();
+    // get all required data
     const username = document.getElementById('signupUsername').value,
         password = document.getElementById('signupPassword').value,
         confirmPassword = document.getElementById('signupConfirmPassword').value,
         email = document.getElementById('signupEmail').value,
         name = document.getElementById('signupName').value;
-        
+    // check if all filled
     if (password === "" || confirmPassword === "" || username === "" || email === "" || name === "") {
         showModal("Incomplete Form", "Please fill all fields.");
     } else if (password !== confirmPassword) {
         showModal("Passwords do not match!", "Please try again.");
-    } else if (!checkEmail(email)) {
+    } else if (!checkNewEmail(email)) {
         showModal("Invalid Email!", "Please use a valid email address");
     } else {
         const requestData = {
@@ -98,3 +120,31 @@ signup.addEventListener('submit', event => {
     }
 
 });
+
+/**
+ * Button listeners
+ */
+
+// handles signup new user request to sign up
+signupButton.addEventListener("click", event => {
+    event.preventDefault();
+    login.style.display = 'none';
+    signup.style.display = 'block';
+});
+
+// handles logout request
+logout.addEventListener('click', event => {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    feed.style.display = 'none';
+    login.style.display = 'block';
+    nav.style.display = 'none';
+})
+
+// handles logout request
+toLogin.addEventListener('click', event => {
+    event.preventDefault();
+    signup.style.display = 'none';
+    signupForm.reset();
+    login.style.display = 'block';
+})
