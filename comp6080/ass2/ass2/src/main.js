@@ -29,6 +29,7 @@ if (localStorage.getItem('token') !== null) {
     getNewFeed(api);
 
 } else {
+    feed.style.display = 'none';
     logout.style.display = 'none';
     login.style.display = "block";
 }
@@ -140,9 +141,9 @@ signupButton.addEventListener("click", event => {
 logout.addEventListener('click', event => {
     event.preventDefault();
     localStorage.removeItem('token');
-    feed.style.display = 'none';
     login.style.display = 'block';
     nav.style.display = 'none';
+    feed.style.display = 'none';
 })
 
 // handles logout request

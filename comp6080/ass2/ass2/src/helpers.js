@@ -77,12 +77,14 @@ export function showModal(title, content) {
         modal.style.display = 'none';
     });
 
+    /*
     // closes modal if clicks outside of box
     window.addEventListener('click', event => {
         if (!event.target.closest(".modal") || event.target.closest("")) {
             modal.style.display = 'none';
         }
     });
+    */
 }
 
 /**

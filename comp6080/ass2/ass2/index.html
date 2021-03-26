@@ -31,7 +31,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="modalTitle">Modal title</h5>
+                    <h5 class="modal-title" id="modalTitle">Modal title</h5>
                 </div>
                 <div class="modal-body" id="modalContent">
                   Filler
@@ -58,8 +58,9 @@
                 <!--Submit with login and with enter!-->
                 <button class="btn btn-primary" type="submit">Login</button>
                 <button class="btn btn-primary" id="signupButton">Sign Up</button>
+
+                <!--Enter to submit-->
                 <input type="submit" style="visibility: hidden;" />
-    
             </form>
         </div>
 
@@ -92,19 +93,33 @@
                     <input class="form-control"type="name" placeholder="Enter Name" id="signupName"/>
                 </div>
 
+                <!--Submission and back buttons-->
                 <button class="btn btn-primary" type="submit">Submit</button>
                 <button class="btn btn-secondary" id="toLogin">Back</button>
             </form>
             
         </div>
-        <!-- Feed signup form-->
-        <div class="feed-container" name="feed" id="feedContainer">
-            <div class="feed-banner">Feed!</div>
-            <div class="feed-content" id="feed">
-                
+
+        <!-- Feed cards-->
+        <div class="feed-container flex-column" id="feedContainer">
+
+        </div>
+
+        <!-- Example card for feed
+
+        <div class="card" name="feed" id="feedContainer">
+            <div class="card-header">
+                Feed!
+            </div>
+            <div class="card-body">
+                <div class="card-title"></div>
+                <div class="card-text" id="feed"></div>
+                <button class="btn btn-primary" id="likes"></button
+                etc...
             </div>
         </div>
 
+        -->
         
         
     </main>
