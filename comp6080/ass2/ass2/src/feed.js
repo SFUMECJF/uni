@@ -12,9 +12,6 @@ export function getNewFeed(api) {
     api.getFeed('user/feed', localStorage.getItem('token'))
         .then(response => response.json())
         .then(jsonResponse => {
-            console.log(localStorage.getItem('token'));
-            console.log(jsonResponse.posts);
-            
             if (jsonResponse.posts !== undefined) {
                 jsonResponse.posts.forEach(element => {
                     feed.appendChild(addFeedContent(element, api));

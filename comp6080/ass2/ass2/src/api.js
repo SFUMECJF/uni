@@ -41,6 +41,11 @@ export default class API {
         return fetch(`${this.url}/${path}`, data);
     }
 
+    /**
+     * Will return fetch feed of given user that is logged in
+     * @param {string} path 
+     * @returns fetch 
+     */
     getFeed(path) {
         const data = {
             method: 'GET',
@@ -52,6 +57,12 @@ export default class API {
 
         return fetch(`${this.url}/${path}`, data);
     }
+
+    /**
+     * Given User id, will return username fetch
+     * @param {int} id 
+     * @returns fetch
+     */
     getUsernameById(id) {
         const data = {
             method: 'GET',

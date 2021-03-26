@@ -84,7 +84,8 @@ export function showModal(title, content) {
 
 /**
  * Creates a html like list out of all the likes in the list
- * @param {Array} uidLikes 
+ * @param {Array} uidLikes
+ * @returns a HTMLElement which can be displayed (modal or appended anywhere) 
  */
 export function createLikeList(uidLikes, api) {
     const nLikes = uidLikes.length;
@@ -111,7 +112,11 @@ export function createLikeList(uidLikes, api) {
     return likeList;
 }
 
-// checks if new email is valid
+/**
+ * Given an email, will return whether it is a real email via regex
+ * @param {string} newEmail 
+ * @returns boolean
+ */
 export function checkNewEmail(newEmail) {
     const regex = /^[^\s@]+@[^\s@]+$/;
     return regex.test(newEmail);
