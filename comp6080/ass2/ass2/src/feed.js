@@ -9,11 +9,10 @@ import { fileToDataUrl, showModal, checkNewEmail, removeChilds, createLikeList} 
 export function getNewFeed(api) {
     const feed = document.getElementById('feedContainer');
     removeChilds(feed);
-    console.log("check");
     api.getFeed('user/feed', localStorage.getItem('token'))
         .then(response => response.json())
         .then(jsonResponse => {
-            if (jsonResponse.posts.length !== 0) {
+            if (jsonResponse.posts !== undefined && jsonResponse.posts.length !== 0) {
                 jsonResponse.posts.forEach(element => {
                     feed.appendChild(addFeedContent(element, api));
                 })

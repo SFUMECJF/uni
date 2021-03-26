@@ -22,6 +22,10 @@ const login = document.getElementById('login'),
     logout = document.getElementById('logout'),
     toLogin = document.getElementById('toLogin');
 
+// when refreshed or opening new window of app
+// will check to see if logged in 
+// if logged in with token, will show feed
+// else will show login page
 if (localStorage.getItem('token') !== null) {
     feed.style.display = 'flex';
     nav.style.display = 'inline';
@@ -32,7 +36,6 @@ if (localStorage.getItem('token') !== null) {
     nav.style.display = 'none';
     login.style.display = "block";
 }
-
 
 // handles login attempt
 login.addEventListener("submit", event => {
@@ -51,14 +54,18 @@ login.addEventListener("submit", event => {
                     .then(token => {
                         // shows the feed and allows for logout. also sets token in localstorage
                         login.style.display = 'none';
-                        getNewFeed(api);
+                        
                         feed.style.display = 'flex';
 
                         // set token
                         localStorage.setItem('token', token.token);
+                        // printing token for dev use
                         console.log(localStorage.getItem('token'));
                         // show navigation only avaliable if logged in
                         nav.style.display = 'inline';
+                        // show feed after logging in
+                        getNewFeed(api);
+
                     })
 
             // bad username/password
