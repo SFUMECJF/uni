@@ -1,6 +1,7 @@
 import API from './api.js';
 // A helper you may want to use when uploading new images to the server.
 import { fileToDataUrl, showModal, changeContent, checkNewEmail} from './helpers.js';
+import {getNewFeed} from './feed.js'
 
 // This url may need to change depending on what port your backend is running
 // on.
@@ -55,6 +56,7 @@ login.addEventListener("submit", event => {
 
                         // show navigation only avaliable if logged in
                         nav.style.display = 'inline';
+                        getNewFeed();
                     })
 
             // bad username/password

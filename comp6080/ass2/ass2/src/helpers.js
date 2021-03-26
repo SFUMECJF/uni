@@ -29,6 +29,17 @@ export function fileToDataUrl(file) {
     reader.readAsDataURL(file);
     return dataUrlPromise;
 }
+
+/**
+ * Removes all child nodes in given element
+ * @param {HTMLElement} element 
+ */
+ export function removeChilds(element) {
+    while(element.hasChildNodes()) {
+        element.removeChild(element.childNodes[0]);
+    }
+}
+
 /**
  * Creates a modal popup that covers the entire screen
  * @param {String} title 
@@ -37,9 +48,7 @@ export function fileToDataUrl(file) {
 export function showModal(title, content) {
     let modal = document.getElementById('modalContainer');
 
-    while (modal.hasChildNodes()) {
-        modal.removeChild(modal.childNodes[0]);
-    }
+    removeChilds(modal);
 
     // new header
     let newTitle = document.createElement('h3');
@@ -81,9 +90,7 @@ export function showModal(title, content) {
  * @param {String} newContent 
  */
 export function changeContent(element, content) {
-    while(element.hasChildNodes()) {
-        element.removeChild(element.childNodes[0]);
-    }
+    removeChilds(element);
     var newContent = document.createElement('span');
 
     newContent.appendChild(document.createTextNode(content));

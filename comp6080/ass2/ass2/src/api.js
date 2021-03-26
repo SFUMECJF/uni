@@ -39,4 +39,6 @@ export default class API {
 
         return fetch(`${this.url}/${path}`, data);
     }
+
+    
 }
