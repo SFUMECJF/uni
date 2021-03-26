@@ -102,5 +102,6 @@ export function changeContent(element, content) {
 
 // checks if new email is valid
 export function checkNewEmail(newEmail) {
-    return true;
+    const regex = /^[^\s@]+@[^\s@]+$/;
+    return regex.test(newEmail);
 }
