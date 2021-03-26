@@ -49,6 +49,7 @@ footer {
     margin: 10px 25px;
 }
 
+/* nav related css */
 .nav {
     display: none;
     list-style-type: none;
@@ -78,6 +79,7 @@ footer {
 }
 
 
+/* Feed related css */
 .form-container {
     display: none;
     margin: 0 auto; 
@@ -93,7 +95,6 @@ footer {
     text-align: center;
     align-items: center;
 }
-
 
 /* Modal properties */
 .modal {
@@ -119,4 +120,10 @@ footer {
     padding-top: 2%;
     border: 2px solid black;
     border-bottom: none;
+}
+
+.feed-unit {
+    width: 80%;
+    height: 20%;
+    padding: 2%;
 }
