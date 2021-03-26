@@ -22,7 +22,6 @@ const login = document.getElementById('login'),
     logout = document.getElementById('logout'),
     toLogin = document.getElementById('toLogin');
 
-
 if (localStorage.getItem('token') !== null) {
     feed.style.display = 'flex';
     nav.style.display = 'inline';
@@ -57,7 +56,7 @@ login.addEventListener("submit", event => {
 
                         // set token
                         localStorage.setItem('token', token.token);
-
+                        console.log(localStorage.getItem('token'));
                         // show navigation only avaliable if logged in
                         nav.style.display = 'inline';
                     })
