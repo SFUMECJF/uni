@@ -200,4 +200,15 @@ export default class API {
         }
         return fetch(`${this.url}/post?id=${id}`, data).then(post => post.json());
     }
+
+    newPost(src, description) {
+        const data = {
+            method: "POST", 
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            },
+        }
+        return fetch(`${this.url}/post`, data).then(post => post.json());
+    }
 }

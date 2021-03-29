@@ -25,7 +25,8 @@ const login = document.getElementById('login'),
     logout = document.getElementById('logout'),
     toLogin = document.getElementById('toLogin'),
     profile = document.getElementById('profile'),
-    feed = document.getElementById('feedContainer');
+    feed = document.getElementById('feedContainer'),
+    post = document.getElementById('post');
 
 // when refreshed or opening new window of app
 // will check to see if logged in 
@@ -184,5 +185,22 @@ document.addEventListener('scroll', event => {
 profile.addEventListener('click', event => {
     event.preventDefault()
     getProfile(api, localStorage.getItem('username'));
+})
+
+post.addEventListener('click', event => {
+
+    const postBody = document.createElement('form');
+    const description = document.createElement('textarea');
+    const photoInput = document.createElement('input');
+    photoInput.setAttribute('type', 'file');
+    const postConfirm = document.createTextNode('input');
+    postConfirm.setAttribute('type', 'submit');
+    
+
+
+    postBody.appendChild(description);
+    postBody.appendChild(photoInput);
+
+    postBody.addEventListener('submit', )
 })
 
