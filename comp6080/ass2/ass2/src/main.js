@@ -206,7 +206,7 @@ post.addEventListener('click', event => {
     postBody.appendChild(postConfirm);
     postBody.addEventListener('submit', event => {
         event.preventDefault();
-        if (photoInput.files[0] === '' || description.value === '') {
+        if (photoInput.files[0] === undefined || description.value === undefined) {
             showModal("Failure!", "Must fill all fields");
         } else {
             fileToDataUrl(photoInput.files[0])
@@ -223,9 +223,9 @@ post.addEventListener('click', event => {
             .catch(response => {
                 handleError(response);
             })
+            closeModal();
         }
         
-        closeModal();
     })
 
     showModal("New Post!", postBody);
