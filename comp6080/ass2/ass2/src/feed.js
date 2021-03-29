@@ -18,6 +18,7 @@ export function getMoreFeed(api, p, feed) {
         followToSee.appendChild(document.createTextNode('follow to see content!'));
         followToSee.style.textAlign = 'center';
         feed.appendChild(followToSee);
+        return 0;
     } else {
         api.getFeed('user/feed', p)
         .then(jsonResponse => {
@@ -31,9 +32,9 @@ export function getMoreFeed(api, p, feed) {
         .catch(response => {
             handleError(response);
         })
+        return 10;
     }
     // increments in 10 to ensure it keeps on loading infinitely
-    return 10;
 }
 /**
  * Given a post will add to feed

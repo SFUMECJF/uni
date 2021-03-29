@@ -88,7 +88,7 @@ export default class API {
             },
         }
 
-        return fetch(`${this.url}/user`, data);
+        return fetch(`${this.url}/user`, data).then(user => user.json());
     }
 
     /**

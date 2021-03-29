@@ -35,8 +35,7 @@ const login = document.getElementById('login'),
 if (localStorage.getItem('token') !== null) {
     feed.style.display = 'flex';
     nav.style.display = 'inline';
-    setUserDetails(api);
-    p += getMoreFeed(api, p, feed);
+    setupUi(api);
 } else {
     removeUserDetails();
     removeFeed();
@@ -68,16 +67,9 @@ login.addEventListener("submit", event => {
 
                         // set token
                         localStorage.setItem('token', response.token);
-
-                        // set user id
-                        setUserDetails(api);
-                        // printing token for dev use
-                        console.log(localStorage.getItem('token'));
-                        // show navigation only avaliable if logged in
-                        nav.style.display = 'inline';
-                        // show feed after logging in
-                        p += getMoreFeed(api, p, feed);
-
+                        
+                        // setup ui
+                        setupUi(api);
                     })
 
             // bad username/password
@@ -92,7 +84,7 @@ login.addEventListener("submit", event => {
 
         // catch error in API
         .catch(response => {
-            console.log(response.message)
+            handleError(response);
         })
     // reset login form
     loginForm.reset();
@@ -224,3 +216,18 @@ post.addEventListener('click', event => {
     showModal("New Post!", postBody);
 })
 
+function setupUi(api) {
+    // set user id
+    setUserDetails(api)
+        .then (response => {
+            // printing token for dev use
+            console.log(localStorage.getItem('token'));
+            // show navigation only avaliable if logged in
+            nav.style.display = 'inline';
+            // show feed after logging in
+            p += getMoreFeed(api, p, feed);
+        })
+        .catch(response => {
+            handleError(response);
+        })
+}

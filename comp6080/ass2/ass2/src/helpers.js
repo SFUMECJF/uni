@@ -151,8 +151,7 @@ export function handleError(message) {
  * @param {api} api 
  */
 export function setUserDetails(api) {
-    api.getCurrentUserId()
-        .then(response => (response.json()))
+    return (api.getCurrentUserId()
         .then(response => {
             localStorage.setItem('id', response.id);
             localStorage.setItem('username', response.username);
@@ -161,6 +160,7 @@ export function setUserDetails(api) {
         .catch(response => {
             handleError(response);
         })
+    );
 }
 
 /**
