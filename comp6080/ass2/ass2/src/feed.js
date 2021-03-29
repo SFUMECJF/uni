@@ -15,7 +15,6 @@ let p = 0;
  */
 
 export function getMoreFeed(api, feed, newFeed, docDown) {
-    console.log(p);
     if (newFeed) {
         p = 0;
     }
@@ -28,7 +27,6 @@ export function getMoreFeed(api, feed, newFeed, docDown) {
     } else {
         api.getFeed('user/feed', p)
         .then(jsonResponse => {
-            console.log(p);
             if (jsonResponse.posts !== undefined && jsonResponse.posts.length !== 0) {
                 jsonResponse.posts.forEach(element => {
                     feed.appendChild(addFeedContent(element, api));
@@ -100,7 +98,7 @@ export function addFeedContent(element, api) {
     const image = document.createElement('img');
     image.setAttribute('class', 'card-img-top');
     image.setAttribute('src', post.srcImage);
-    image.setAttribute('alt', 'postImage');
+    image.setAttribute('alt', 'posted Image by ' + post.author);
     
 
 
@@ -340,7 +338,6 @@ function updateComments (id, newNumber) {
     if (newNumber === 0) {
         changeText(comments, "Comment on this post!");
     } else if (newNumber === 1) {
-        console.log('hit');
         changeText(comments, "1 Comment");
     } else {
         changeText(comments, newNumber + " comments");
