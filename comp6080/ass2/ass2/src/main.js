@@ -13,7 +13,6 @@ const api = new API('http://localhost:5000');
 //    .then(r => console.log(r));
 
 // p to keep track of where to start
-let p = 0;
 
 // all getElement declarations
 const login = document.getElementById('login'),
@@ -28,6 +27,14 @@ const login = document.getElementById('login'),
     feed = document.getElementById('feedContainer'),
     post = document.getElementById('post');
 
+const docDown = function(event) {
+    console.log('down');
+    if (document.scrollingElement.scrollTop >= (document.body.scrollHeight/2)) {
+        console.log('hit bottom!');
+        getMoreFeed(api, feed, false, docDown);
+    }   
+}
+
 // when refreshed or opening new window of app
 // will check to see if logged in 
 // if logged in with token, will show feed
@@ -39,11 +46,16 @@ if (localStorage.getItem('token') !== null) {
 } else {
     removeUserDetails();
     removeFeed();
-    p = 0;
     feed.style.display = 'none';
     nav.style.display = 'none';
     login.style.display = "block";
 }
+
+
+/**
+ * Lots Of listeners
+ */
+
 
 // handles login attempt
 login.addEventListener("submit", event => {
@@ -136,10 +148,6 @@ signup.addEventListener('submit', event => {
 
 });
 
-/**
- * Button listeners
- */
-
 // handles signup new user request to sign up
 signupButton.addEventListener("click", event => {
     event.preventDefault();
@@ -152,11 +160,10 @@ logout.addEventListener('click', event => {
     event.preventDefault();
     removeUserDetails();
     removeFeed();
-    p = 0;
     login.style.display = 'block';
     nav.style.display = 'none';
     feed.style.display = 'none';
-})
+});
 
 // handles logout request
 toLogin.addEventListener('click', event => {
@@ -164,23 +171,17 @@ toLogin.addEventListener('click', event => {
     signup.style.display = 'none';
     signupForm.reset();
     login.style.display = 'block';
-})
+});
 
-// Window bottom of page continue loading
-document.addEventListener('scroll', event => {
-    if (document.scrollingElement.scrollTop >= document.body.offsetHeight) {
-        p += getMoreFeed(api, p, feed);
-    }
-})
 
 // shows own profile
 profile.addEventListener('click', event => {
     event.preventDefault()
     getProfile(api, localStorage.getItem('username'));
-})
+});
 
+// adding new post
 post.addEventListener('click', event => {
-
     const postBody = document.createElement('form');
     // text inpit
     const description = document.createElement('textarea');
@@ -191,31 +192,48 @@ post.addEventListener('click', event => {
     const postConfirm = document.createElement('input');
     postConfirm.setAttribute('type', 'submit');
     
-
-
     postBody.appendChild(description);
     postBody.appendChild(photoInput);
     postBody.appendChild(document.createElement('br'));
     postBody.appendChild(postConfirm);
     postBody.addEventListener('submit', event => {
         event.preventDefault();
-        fileToDataUrl(photoInput.files[0])
+        if (photoInput.files[0] === '' || description.value === '') {
+            showModal("Failure!", "Must fill all fields");
+        } else {
+            fileToDataUrl(photoInput.files[0])
             .then(file => {
-                api.newPost(file, description.value)
+                 {
+                    api.newPost(file, description.value)
                     .catch (response => {
                         handleError(response);
                     })
-                showModal("Success!", "Posted Successfully");
+                    showModal("Success!", "Posted Successfully");
+                }
+                
             })
             .catch(response => {
                 handleError(response);
             })
+        }
+        
         closeModal();
     })
 
     showModal("New Post!", postBody);
-})
+});
 
+// Window bottom of page continue loading
+// Curently only sometimes working when refreshed or initial login
+// cannot for the life of me get this thing working the way i want it
+// cannot readd event listener
+// causes extremely weird behaviour almost like there are multiple listeners 
+document.addEventListener('scroll', docDown, true);
+
+/**
+ * Setups up a NEW UI for user to use.
+ * @param {API} api 
+ */
 function setupUi(api) {
     // set user id
     setUserDetails(api)
@@ -225,7 +243,7 @@ function setupUi(api) {
             // show navigation only avaliable if logged in
             nav.style.display = 'inline';
             // show feed after logging in
-            p += getMoreFeed(api, p, feed);
+            getMoreFeed(api, feed, true, docDown);
         })
         .catch(response => {
             handleError(response);

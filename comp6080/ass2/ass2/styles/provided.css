@@ -77,7 +77,7 @@ footer {
 
 .feed-container {
     display: none;
-    padding-bottom: 10%;
+    padding-bottom: 15%;
 }
 
 .feed-container > div {
@@ -85,9 +85,6 @@ footer {
 }
 
 /* Modal properties */
-body.modal-open {
-    overflow: hidden;
-}
 
 .modal-body {
     max-height: 50%;

@@ -81,35 +81,7 @@ export function showModal(title, content) {
     });
 }
 
-/**
- * Creates a html like list out of all the likes in the list
- * @param {Array} uidLikes
- * @returns a HTMLElement which can be displayed (modal or appended anywhere) 
- */
-export function createLikeList(uidLikes, api) {
-    const nLikes = uidLikes.length;
 
-    console.log(uidLikes);
-    let likeList = document.createElement('ul');
-
-    let i = 0;
-    if (nLikes > 0) {
-        for (i = 0; i < nLikes; i++) {
-            api.getUsernameById(uidLikes[i])
-                .then(response => response.json())
-                .then(jsonResponse => {
-                    let listUser = document.createElement('li');
-                    listUser.appendChild(document.createTextNode(jsonResponse.username));
-                    likeList.appendChild(listUser);
-                })
-        }
-    } else {
-        likeList = document.createElement('div');
-        likeList.appendChild(document.createTextNode('No likes yet'))
-    }
-    
-    return likeList;
-}
 
 /**
  * Given an email, will return whether it is a real email via regex
@@ -188,6 +160,9 @@ export function removeFollow(id) {
     localStorage.setItem('following', followArray);
 }
 
+/**
+ * removes the feed view for re-initialisation
+ */
 export function removeFeed() {
     const feed = document.getElementById('feedContainer');
     removeChilds(feed);
@@ -217,8 +192,22 @@ export function createFollowingList(followList, api) {
     }
 }
 
+/**
+ * Closes Modal that is presumed open
+ * Does nothing if modal is already closed
+ */
+
 export function closeModal() {
     // close modal
     const modal = document.getElementById('modalContainer');
     modal.style.display = 'none';
+}
+
+export function docDown(event) {
+    console.log('down');
+    if (document.scrollingElement.scrollTop >= (document.body.scrollHeight/4 * 3)) {
+        console.log('hit bottom!');
+        getMoreFeed(api, feed, false);
+    }
+    
 }

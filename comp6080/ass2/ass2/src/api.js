@@ -214,4 +214,15 @@ export default class API {
         }
         return fetch(`${this.url}/post`, data).then(post => post.json());
     }
+
+    updateAccount(responseData) {
+        const data = {
+            method: "PUT", 
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            }, body: JSON.stringify(responseData)
+        }
+        return fetch(`${this.url}/user`, data).then(user => user.json());
+    }
 }

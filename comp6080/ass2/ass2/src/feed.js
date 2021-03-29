@@ -1,9 +1,11 @@
 import API from './api.js';
 import { fileToDataUrl, showModal, checkNewEmail, 
-        removeChilds, createLikeList, changeText, 
+        removeChilds, changeText, 
         handleError, closeModal} from './helpers.js';
 
 import {getProfile} from './profile.js';
+
+let p = 0;
 
 /**
  * Given an api will request for posts and add them to feed
@@ -11,28 +13,38 @@ import {getProfile} from './profile.js';
  * @param {int} p
  * @param {HTMLElement} feed
  */
-export function getMoreFeed(api, p, feed) {
+
+export function getMoreFeed(api, feed, newFeed, docDown) {
+    console.log(p);
+    if (newFeed) {
+        p = 0;
+    }
     if (localStorage.getItem('following').length === 0) {
         removeChilds(feed);
         const followToSee = document.createElement('div');
         followToSee.appendChild(document.createTextNode('follow to see content!'));
         followToSee.style.textAlign = 'center';
         feed.appendChild(followToSee);
-        return 0;
     } else {
         api.getFeed('user/feed', p)
         .then(jsonResponse => {
+            console.log(p);
             if (jsonResponse.posts !== undefined && jsonResponse.posts.length !== 0) {
                 jsonResponse.posts.forEach(element => {
                     feed.appendChild(addFeedContent(element, api));
                 })
+            }
+
+            // it has reached its end! There are no more posts to retrieve
+            if (jsonResponse.posts.length < 10) {
+                document.removeEventListener('scroll', docDown, true);
             }
         })
         // log error in console
         .catch(response => {
             handleError(response);
         })
-        return 10;
+        p += 10;
     }
     // increments in 10 to ensure it keeps on loading infinitely
 }
@@ -215,7 +227,6 @@ export function addFeedContent(element, api) {
         const newCommentArray = createInput();
         const newComment = newCommentArray[0];
         const textArea = newCommentArray[1];
-
         // add form submit
         newComment.addEventListener('submit', event => {
             event.preventDefault();
@@ -224,14 +235,21 @@ export function addFeedContent(element, api) {
             // update ui after posting.
             api.postComment(post.id, textArea.value)
                 .then(response => {
-                    console.log(textArea.value);
-                    element.comments.push({
-                        "author": localStorage.getItem('username'),
-                        'comment': textArea.value
-                    });
-                    post.nComments++;
-                    updateComments(post.id, post.nComments);
-                    showModal('Sucess!', 'Comment Successfully Added!')
+                    // cant comment nothing!
+                    if (textArea.value === '') {
+                        showModal('Failure!', 'Please add text to field!')
+                    } else {
+                        console.log(textArea.value);
+                        element.comments.push({
+                            "author": localStorage.getItem('username'),
+                            'comment': textArea.value
+                         });
+                        post.nComments++;
+                        updateComments(post.id, post.nComments);
+
+                        showModal('Success!', 'Comment Successfully Added!')
+                    }
+                    
                 })
                 .catch(response => {
                     handleError(response);
@@ -352,17 +370,23 @@ function updatable(id, src, api) {
         const form = inputForm[0];
         const textArea = inputForm[1];
 
-        // edits post without updating live view
-        form.addEventListener('submit', event => {
-            event.preventDefault();
-            api.editPost(id, src, textArea.value)
-                .catch (response => {
-                    handleError(response);
-                })
-            showModal("Success!", "Updated Successfully");
-        })
+            // edits post without updating live view
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                if (textArea.value === '') {
+                    showModal("Failure!", "Description cannot be empty!");
+                } else {
+                    api.editPost(id, src, textArea.value)
+                    .catch (response => {
+                        handleError(response);
+                    })
+                    showModal("Success!", "Updated Successfully");
+                }
+                
+            })
 
-        showModal('Update Post!', form);
+            showModal('Update Post!', form);
+        
         
     })
 
@@ -392,3 +416,33 @@ function updatable(id, src, api) {
     return [updateButton, deleteButton];
 }
 
+
+/**
+ * Creates a html like list out of all the likes in the list
+ * @param {Array} uidLikes
+ * @returns a HTMLElement which can be displayed (modal or appended anywhere) 
+ */
+function createLikeList(uidLikes, api) {
+    const nLikes = uidLikes.length;
+
+    console.log(uidLikes);
+    let likeList = document.createElement('ul');
+
+    let i = 0;
+    if (nLikes > 0) {
+        for (i = 0; i < nLikes; i++) {
+            api.getUsernameById(uidLikes[i])
+                .then(response => response.json())
+                .then(jsonResponse => {
+                    let listUser = document.createElement('li');
+                    listUser.appendChild(document.createTextNode(jsonResponse.username));
+                    likeList.appendChild(listUser);
+                })
+        }
+    } else {
+        likeList = document.createElement('div');
+        likeList.appendChild(document.createTextNode('No likes yet'))
+    }
+    
+    return likeList;
+}
