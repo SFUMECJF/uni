@@ -223,7 +223,6 @@ post.addEventListener('click', event => {
             .catch(response => {
                 handleError(response);
             })
-            closeModal();
         }
         
     })
