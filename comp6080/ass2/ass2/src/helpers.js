@@ -127,14 +127,18 @@ export function checkNewEmail(newEmail) {
  * @param {String} newContent 
  */
  export function changeText(element, content) {
-    if (element.firstChild !== null) {
-        removeChilds(element);
+    // only edits if the element exists on the page
+    if (element !== null) {
+        if (element.firstChild !== null) {
+            removeChilds(element);
+        }
+    
+        var newContent = document.createElement('span');
+    
+        newContent.appendChild(document.createTextNode(content));
+        element.appendChild(newContent);
     }
 
-    var newContent = document.createElement('span');
-
-    newContent.appendChild(document.createTextNode(content));
-    element.appendChild(newContent);
 }
 
 export function handleError(message) {

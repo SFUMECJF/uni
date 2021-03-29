@@ -231,6 +231,7 @@ export function addFeedContent(element, api) {
                     });
                     post.nComments++;
                     updateComments(post.id, post.nComments);
+                    showModal('Sucess!', 'Comment Successfully Added!')
                 })
                 .catch(response => {
                     handleError(response);
