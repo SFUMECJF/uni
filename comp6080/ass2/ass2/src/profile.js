@@ -34,7 +34,7 @@ export function profileModal(response, api) {
     following.appendChild(createFollowingList(response.following, api));
 
     const followed = document.createElement('li');
-    followed.appendChild(document.createTextNode('Follows: ' + response.followed_num));
+    followed.appendChild(document.createTextNode('Followers: ' + response.followed_num));
     
     // creating follow button
     const followButton = document.createElement('input');
@@ -89,6 +89,9 @@ export function profileModal(response, api) {
 
     const profileFeed = createProfileFeed(response.posts, api);
     profileFeed.style.display = 'block';
+
+
+
     // creating profile card/modal
     details.appendChild(name);
     details.appendChild(email);
@@ -99,6 +102,7 @@ export function profileModal(response, api) {
     profileCard.appendChild(followLabel);
     profileCard.appendChild(profileFeed);
     
+
     showModal(title, profileCard);
 
 }   
@@ -120,3 +124,4 @@ function createProfileFeed(posts, api) {
     }
     return newFeed;
 }
+

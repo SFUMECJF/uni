@@ -78,7 +78,6 @@ export function showModal(title, content) {
     closebutton.addEventListener('click', event => {
         event.preventDefault();
         modal.style.display = 'none';
-        body.style.overflow = 'visible';
     });
 }
 
@@ -212,3 +211,8 @@ export function createFollowingList(followList, api) {
     }
 }
 
+export function closeModal() {
+    // close modal
+    const modal = document.getElementById('modalContainer');
+    modal.style.display = 'none';
+}

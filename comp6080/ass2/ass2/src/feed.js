@@ -1,7 +1,7 @@
 import API from './api.js';
 import { fileToDataUrl, showModal, checkNewEmail, 
         removeChilds, createLikeList, changeText, 
-        handleError} from './helpers.js';
+        handleError, closeModal} from './helpers.js';
 
 import {getProfile} from './profile.js';
 
@@ -141,25 +141,6 @@ export function addFeedContent(element, api) {
     commentButton.setAttribute('class', 'btn btn-secondary');
     commentButton.appendChild(document.createTextNode('comment'));
 
-
-    // creating div for like and comment button
-    const interactionDiv = document.createElement('div');
-    interactionDiv.appendChild(likeButton);
-    interactionDiv.appendChild(likeLabel);
-    interactionDiv.appendChild(commentButton);
-    
-    // feed header
-    feedHeader.appendChild(author);
-    feedHeader.appendChild(postDate);
-
-    // adding to card body
-    cardBody.appendChild(desc);
-    cardBody.appendChild(image);
-
-    cardBody.appendChild(likes);
-    cardBody.appendChild(comments);
-
-    cardBody.appendChild(interactionDiv);
     // adding listeners
     // like listener button to list
     likes.addEventListener('click', event => {
@@ -224,7 +205,7 @@ export function addFeedContent(element, api) {
     // adding comment
     commentButton.addEventListener('click', event => {
         event.preventDefault();
-        const newCommentArray = createComment();
+        const newCommentArray = createInput();
         const newComment = newCommentArray[0];
         const textArea = newCommentArray[1];
 
@@ -241,22 +222,47 @@ export function addFeedContent(element, api) {
                         "author": localStorage.getItem('username'),
                         'comment': textArea.value
                     });
-
-                    updateComments(post.id, post.nComments);
                     post.nComments++;
+                    updateComments(post.id, post.nComments);
                 })
                 .catch(response => {
                     handleError(response.status, response.message);
                 })
             
             // close modal
-            const modal = document.getElementById('modalContainer');
-            modal.style.display = 'none';
+            closeModal();
         })
 
         showModal("New Comment", newComment);
 
     })
+
+    // creating div for like and comment button
+    const interactionDiv = document.createElement('div');
+    interactionDiv.appendChild(likeButton);
+    interactionDiv.appendChild(likeLabel);
+    interactionDiv.appendChild(commentButton);
+    // if it is updatable by current user add in buttons to interaction div
+    if (post.author === localStorage.getItem('username')) {
+        const updatableItems = updatable(post.id, post.src, api);
+        // add update
+        interactionDiv.appendChild(updatableItems[0]);
+        // add delte
+        interactionDiv.appendChild(updatableItems[1]);
+    }
+    
+    // feed header
+    feedHeader.appendChild(author);
+    feedHeader.appendChild(postDate);
+
+    // adding to card body
+    cardBody.appendChild(desc);
+    cardBody.appendChild(image);
+
+    cardBody.appendChild(likes);
+    cardBody.appendChild(comments);
+
+    cardBody.appendChild(interactionDiv);
     
     // creating the card!
     // author + post date
@@ -284,19 +290,24 @@ function updateLikes(id, newNumber) {
     }
 }
 
-function createComment() {;
-    const newComment = document.createElement('form');
+function createInput() {;
+    const form = document.createElement('form');
 
     const textArea = document.createElement('textarea');
     const submit = document.createElement('input');
     submit.setAttribute('type', 'submit');
 
-    newComment.appendChild(textArea);
-    newComment.appendChild(submit);
+    form.appendChild(textArea);
+    form.appendChild(submit);
 
-    return [newComment, textArea];
+    return [form, textArea];
 }
 
+/**
+ * Updates number of comments after user posts
+ * @param {int} id post to update
+ * @param {int} newNumber new comment number
+ */
 function updateComments (id, newNumber) {
     const comments = document.getElementById('comments' + id);
     if (newNumber === 0) {
@@ -307,5 +318,68 @@ function updateComments (id, newNumber) {
     } else {
         changeText(comments, newNumber + " comments");
     }
+}
+
+/**
+ * Given post id will create elements that will make the
+ * post editable
+ * @param {int} id postId
+ */
+function updatable(id, src, api) {
+    // update button
+    const updateButton = document.createElement('button');
+    updateButton.setAttribute('class', 'btn btn-success');
+    updateButton.appendChild(document.createTextNode('update'));
+
+    // delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.setAttribute('class', 'btn btn-danger');
+    deleteButton.appendChild(document.createTextNode('delete'));
+
+    // updating button pressed
+    updateButton.addEventListener('click', event => {
+        event.preventDefault();
+        const inputForm = createInput();
+        const form = inputForm[0];
+        const textArea = inputForm[1];
+
+        // edits post without updating live view
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            api.editPost(id, src, textArea.value)
+                .catch (response => {
+                    handleError(response.status, response.message);
+                })
+            closeModal();
+        })
+
+        showModal('Update Post!', form);
+        
+    })
+
+    deleteButton.addEventListener('click', event => {
+        event.preventDefault();
+        const deleteDiv = document.createElement('div');
+        deleteDiv.appendChild(document.createTextNode('Are you sure? Close to cancel'));
+        deleteDiv.appendChild(document.createElement('br'));
+
+        const confirm = document.createElement('button');
+        confirm.setAttribute('class', 'btn btn-danger');
+        confirm.appendChild(document.createTextNode('Yes'));
+        deleteDiv.appendChild(confirm);
+
+        confirm.addEventListener('click', event => {
+            event.preventDefault();
+            api.deletePost(id)
+                .catch (response => {
+                    handleError(response.status, response.message);
+                })
+            closeModal();
+            
+        })
+        showModal('Delete Post!', deleteDiv);
+    })
+
+    return [updateButton, deleteButton];
 }
 

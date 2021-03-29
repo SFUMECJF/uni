@@ -61,6 +61,9 @@ footer {
 }
 
 /* Add your styles here */
+.btn {
+    padding-right: 2%;
+}
 
 .form-group {
     padding-top: 1%;

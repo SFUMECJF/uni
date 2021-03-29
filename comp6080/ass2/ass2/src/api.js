@@ -170,4 +170,34 @@ export default class API {
         }
         return fetch(`${this.url}/post?id=${id}`, data).then(post => post.json());
     }
+
+    editPost(id, src, description) {
+        const data = {
+            method: 'PUT',
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            }, body: JSON.stringify({
+                "src": src,
+                'description_text': description
+            })
+        }
+        return fetch(`${this.url}/post?id=${id}`, data).then(post => post.json());
+    }
+
+    /**
+     * Given post id will delete post 
+     * @param {int} id post id
+     * @returns 
+     */
+    deletePost(id) {
+        const data = {
+            method: "DELETE",
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            },
+        }
+        return fetch(`${this.url}/post?id=${id}`, data).then(post => post.json());
+    }
 }
