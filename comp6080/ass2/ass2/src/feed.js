@@ -3,35 +3,32 @@ import { fileToDataUrl, showModal, checkNewEmail,
         removeChilds, createLikeList, changeText, 
         handleError} from './helpers.js';
 
+import {getProfile} from './profile.js';
 
 /**
  * Given an api will request for posts and add them to feed
  * @param {API} api 
+ * @param {int} p
+ * @param {HTMLElement} feed
  */
-export function getNewFeed(api) {
-    const feed = document.getElementById('feedContainer');
-    removeChilds(feed);
-    api.getFeed('user/feed', localStorage.getItem('token'))
-        .then(response => response.json())
+export function getMoreFeed(api, p, feed) {
+    
+    api.getFeed('user/feed', p)
         .then(jsonResponse => {
             if (jsonResponse.posts !== undefined && jsonResponse.posts.length !== 0) {
                 jsonResponse.posts.forEach(element => {
                     feed.appendChild(addFeedContent(element, api));
                 })
-            } else {
-                const followToSee = document.createElement('div');
-                followToSee.appendChild(document.createTextNode('follow to see content!'));
-                followToSee.style.textAlign = 'center';
-                feed.appendChild(followToSee);
             }
         })
-
         // log error in console
         .catch(response => {
             handleError(response.status, response.message);
         })
+    
+    // increments in 10 to ensure it keeps on loading infinitely
+    return 10;
 }
-
 /**
  * Given a post will add to feed
  * @param {JSON} element 
@@ -58,9 +55,11 @@ export function addFeedContent(element, api) {
     feedHeader.setAttribute('class', 'card-header')
 
     // author
-    const author = document.createElement('h5');
-    author.setAttribute('class', 'card-title');
+    const author = document.createElement('button');
+    author.setAttribute('type', 'button');
+    author.setAttribute('class', 'card-title btn btn-link');
     author.appendChild(document.createTextNode(post.author));
+
 
     // postDate
     const postDate = document.createElement('div');
@@ -103,13 +102,14 @@ export function addFeedContent(element, api) {
     // USED FOR SHOWING LIKES!
     const comments = document.createElement('button');
     comments.setAttribute('class', 'btn btn-link');
+    comments.setAttribute('id', 'comments' + post.id);
     if (post.nComments === 0) {
         comments.appendChild(document.createTextNode("No comments"));
     } else if (post.nComments === 1) {
         comments.appendChild(document.createTextNode("1 comment"));
 
     } else {
-        comments.appendChild(document.createTextNode(post.nLikes + " comments"));
+        comments.appendChild(document.createTextNode(post.nComments + " comments"));
 
     }
 
@@ -129,7 +129,6 @@ export function addFeedContent(element, api) {
 
     // if the user has liked the post already and has refreshed
     if (meta.likes.includes(parseInt(localStorage.getItem('id'), 10))) {
-        console.log('hit');
         likeButton.classList.add = 'active';
         likeLabel.classList.add = 'active';
         changeText(likeLabel, 'unlike');
@@ -141,6 +140,7 @@ export function addFeedContent(element, api) {
     const commentButton = document.createElement('button');
     commentButton.setAttribute('class', 'btn btn-secondary');
     commentButton.appendChild(document.createTextNode('comment'));
+
 
     // creating div for like and comment button
     const interactionDiv = document.createElement('div');
@@ -173,7 +173,7 @@ export function addFeedContent(element, api) {
         if (post.nComments === 0) {
             showModal("Comments", "Be the first to comment!");
         } else {
-            const comments = element.comments
+            const comments = element.comments;
             const commentList = document.createElement('ul');
             let i = 0;
             for (i = 0; i < comments.length; i++) {
@@ -187,34 +187,75 @@ export function addFeedContent(element, api) {
         }
     })
     
+    // adding profile button
+    author.addEventListener('click', event => {
+        event.preventDefault();
+        getProfile(api, post.author);
+    })
+
     // adding listener for likes
     likeButton.addEventListener('change', event => {
         event.preventDefault();
         if (likeButton.checked) {
             api.like(post.id, 'like') 
-                .then(response => response.json())
                 .then (response => {
                     post.nLikes ++;
-                    updateLikes('likes' + post.id, post.nLikes);
+                    updateLikes(post.id, post.nLikes);
                     changeText(likeLabel, 'unlike');
-                    console.log('Done', response);
+                    console.log('liked', response);
                 })
                 .catch(response => {
                     handleError(response.status, response.message);
                 })        
         } else {
             api.like(post.id, 'unlike') 
-                .then(response => response.json())
                 .then (response => {
                         post.nLikes --;
-                        updateLikes('likes' + post.id, post.nLikes);
+                        updateLikes(post.id, post.nLikes);
                         changeText(likeLabel, 'like');
-                        console.log('Done', response);
+                        console.log('unliked', response);
                 })
                 .catch(response => {
                     handleError(response.status, response.message);
                 })
         }
+    })
+
+    // adding comment
+    commentButton.addEventListener('click', event => {
+        event.preventDefault();
+        const newCommentArray = createComment();
+        const newComment = newCommentArray[0];
+        const textArea = newCommentArray[1];
+
+        // add form submit
+        newComment.addEventListener('submit', event => {
+            event.preventDefault();
+
+            // submit comment
+            // update ui after posting.
+            api.postComment(post.id, textArea.value)
+                .then(response => {
+                    console.log(textArea.value);
+                    element.comments.push({
+                        "author": localStorage.getItem('username'),
+                        'comment': textArea.value
+                    });
+
+                    updateComments(post.id, post.nComments);
+                    post.nComments++;
+                })
+                .catch(response => {
+                    handleError(response.status, response.message);
+                })
+            
+            // close modal
+            const modal = document.getElementById('modalContainer');
+            modal.style.display = 'none';
+        })
+
+        showModal("New Comment", newComment);
+
     })
     
     // creating the card!
@@ -228,12 +269,12 @@ export function addFeedContent(element, api) {
 }
 
 /**
- * Given an id will update with new likes number
+ * Given an id of a post will update with new likes number
  * @param {string} id 
  * @param {int} new number of likes
  */
 function updateLikes(id, newNumber) {
-    const likes = document.getElementById(id);
+    const likes = document.getElementById('likes' + id);
     if (newNumber === 0) {
         changeText(likes, "Be the first to like");
     } else if (newNumber === 1) {
@@ -242,3 +283,29 @@ function updateLikes(id, newNumber) {
         changeText(likes, newNumber + " likes");
     }
 }
+
+function createComment() {;
+    const newComment = document.createElement('form');
+
+    const textArea = document.createElement('textarea');
+    const submit = document.createElement('input');
+    submit.setAttribute('type', 'submit');
+
+    newComment.appendChild(textArea);
+    newComment.appendChild(submit);
+
+    return [newComment, textArea];
+}
+
+function updateComments (id, newNumber) {
+    const comments = document.getElementById('comments' + id);
+    if (newNumber === 0) {
+        changeText(comments, "Comment on this post!");
+    } else if (newNumber === 1) {
+        console.log('hit');
+        changeText(comments, "1 Comment");
+    } else {
+        changeText(comments, newNumber + " comments");
+    }
+}
+

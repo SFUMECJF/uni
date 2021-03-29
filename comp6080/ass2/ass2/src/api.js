@@ -46,7 +46,7 @@ export default class API {
      * @param {string} path 
      * @returns fetch 
      */
-    getFeed(path) {
+    getFeed(path, p) {
         const data = {
             method: 'GET',
             headers: {
@@ -55,7 +55,7 @@ export default class API {
             },
         }
 
-        return fetch(`${this.url}/${path}`, data);
+        return fetch(`${this.url}/${path}?p=${p}`, data).then(feed => feed.json());
     }
 
     /**
@@ -73,7 +73,7 @@ export default class API {
             },
         }
 
-        return fetch(`${this.url}/user?id=${id}`, data);
+        return fetch(`${this.url}/user?id=${id}`, data).then(user => user.json());
     }
     /**
      * get current user id
@@ -106,6 +106,68 @@ export default class API {
                 'query': id
             },
         }
-        return fetch(`${this.url}/post/${like}?id=${id}`, data);
+        return fetch(`${this.url}/post/${like}?id=${id}`, data).then(like => like.json());
+    }
+    /**
+     * Given a username, will fetch userdata
+     * @param {string} username 
+     * @returns fetch username
+     */
+    getUser(username) {
+        const data = {
+            method: 'GET',
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`
+            },
+        }
+        return fetch(`${this.url}/user?username=${username}`, data).then(user => user.json());
+    }
+
+    /**
+     * Given an id id and string payload, will post comment to post
+     * id with id with content payload
+     * @param {int} id 
+     * @param {string} payload 
+     * @returns 
+     */
+    postComment(id, payload) {
+        const data = {
+            method: 'PUT',
+            headers : {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({
+                "comment": payload
+            })
+        }
+        return fetch(`${this.url}/post/comment?id=${id}`, data);
+    }
+    /**
+     * Given uId will follow/unfollow
+     * @param {string} username 
+     * @param {string} follow Type of follow/unfollow
+     */
+    follow(username, follow) {
+        const data = {
+            method: 'PUT',
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            },
+        }
+        return fetch(`${this.url}/user/${follow}?username=${username}`, data);
+    }
+
+    getPost(id) {
+        const data = {
+            method: 'GET',
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            },
+        }
+        return fetch(`${this.url}/post?id=${id}`, data).then(post => post.json());
     }
 }

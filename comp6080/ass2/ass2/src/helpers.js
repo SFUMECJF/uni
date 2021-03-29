@@ -72,12 +72,13 @@ export function showModal(title, content) {
     modalContent.appendChild(newContent);
 
     // show modal
-    modal.style.display = 'block';
+    modal.style.display = 'block'; 
 
     // if the user clicks close then will close modal
     closebutton.addEventListener('click', event => {
         event.preventDefault();
         modal.style.display = 'none';
+        body.style.overflow = 'visible';
     });
 }
 
@@ -140,8 +141,7 @@ export function checkNewEmail(newEmail) {
 export function handleError(status, message) {
     console.log(status, message);
     if (status !== undefined && message !== undefined) {
-    showModal(status.toString(), message.toString());
-
+        showModal(status.toString(), message.toString());
     }
 }
 
@@ -149,13 +149,66 @@ export function handleError(status, message) {
  * given an api will set user id to localStorage
  * @param {api} api 
  */
-export function setUserId(api) {
+export function setUserDetails(api) {
     api.getCurrentUserId()
         .then(response => (response.json()))
         .then(response => {
             localStorage.setItem('id', response.id);
+            localStorage.setItem('username', response.username);
+            localStorage.setItem('following', response.following);
         })
         .catch(response => {
             handleError(response.status, response.message);
         })
 }
+
+/**
+ * removes all sensitive data stored in local storage due to login
+ */
+export function removeUserDetails() {
+    localStorage.removeItem('id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('following');
+    localStorage.removeItem('token');
+}
+
+export function removeFollow(id) {
+    let followArray = localStorage.getItem('following');
+    let counter = 0;
+    while (counter < followArray.length) {
+        if (followArray[counter] === id) {
+            followArray.splice(counter, 1);
+        }
+    }
+    localStorage.setItem('following', followArray);
+}
+
+export function removeFeed() {
+    const feed = document.getElementById('feedContainer');
+    removeChilds(feed);
+}
+
+/**
+ * Given a list of ids, will create a list of users that the person
+ * follows
+ * @param {array} followList 
+ * @param {API} api 
+ * @returns 
+ */
+export function createFollowingList(followList, api) {
+    const newList = document.createElement('ul');
+    if (followList.length === 0) {
+        return document.createElement('text').appendChild(document.createTextNode('Not following anyone'));
+    } else {
+        followList.forEach(id => {
+            api.getUsernameById(id)
+                .then(response => {
+                    let newUser = document.createElement('li');
+                    newUser.appendChild(document.createTextNode(response.username));
+                    newList.appendChild(newUser);
+                })
+        });
+        return newList;
+    }
+}
+
