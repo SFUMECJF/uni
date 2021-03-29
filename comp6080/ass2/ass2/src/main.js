@@ -1,6 +1,6 @@
 import API from './api.js';
 // A helper you may want to use when uploading new images to the server.
-import { fileToDataUrl, showModal, checkNewEmail, setUserDetails, removeUserDetails, removeFeed, closeModal} from './helpers.js';
+import { fileToDataUrl, showModal, checkNewEmail, setUserDetails, removeUserDetails, removeFeed, closeModal, handleError} from './helpers.js';
 import {getMoreFeed} from './feed.js'
 import { getProfile } from './profile.js';
 
@@ -211,9 +211,12 @@ post.addEventListener('click', event => {
             .then(file => {
                 api.newPost(file, description.value)
                     .catch (response => {
-                        handleError(response.status, response.message);
+                        handleError(response);
                     })
                 showModal("Success!", "Posted Successfully");
+            })
+            .catch(response => {
+                handleError(response);
             })
         closeModal();
     })

@@ -137,10 +137,12 @@ export function checkNewEmail(newEmail) {
     element.appendChild(newContent);
 }
 
-export function handleError(status, message) {
-    console.log(status, message);
-    if (status !== undefined && message !== undefined) {
-        showModal(status.toString(), message.toString());
+export function handleError(message) {
+    console.log("ERROR", message);
+    if (message !== undefined) {
+        showModal("ERROR!", message.toString());
+    } else {
+        showModal("ERROR!", "");
     }
 }
 
@@ -157,7 +159,7 @@ export function setUserDetails(api) {
             localStorage.setItem('following', response.following);
         })
         .catch(response => {
-            handleError(response.status, response.message);
+            handleError(response);
         })
 }
 

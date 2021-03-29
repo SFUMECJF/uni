@@ -23,7 +23,7 @@ export function getMoreFeed(api, p, feed) {
         })
         // log error in console
         .catch(response => {
-            handleError(response.status, response.message);
+            handleError(response);
         })
     
     // increments in 10 to ensure it keeps on loading infinitely
@@ -186,7 +186,7 @@ export function addFeedContent(element, api) {
                     console.log('liked', response);
                 })
                 .catch(response => {
-                    handleError(response.status, response.message);
+                    handleError(response);
                 })        
         } else {
             api.like(post.id, 'unlike') 
@@ -197,7 +197,7 @@ export function addFeedContent(element, api) {
                         console.log('unliked', response);
                 })
                 .catch(response => {
-                    handleError(response.status, response.message);
+                    handleError(response);
                 })
         }
     })
@@ -226,7 +226,7 @@ export function addFeedContent(element, api) {
                     updateComments(post.id, post.nComments);
                 })
                 .catch(response => {
-                    handleError(response.status, response.message);
+                    handleError(response);
                 })
             
             // close modal
@@ -349,7 +349,7 @@ function updatable(id, src, api) {
             event.preventDefault();
             api.editPost(id, src, textArea.value)
                 .catch (response => {
-                    handleError(response.status, response.message);
+                    handleError(response);
                 })
             showModal("Success!", "Updated Successfully");
         })
@@ -373,7 +373,7 @@ function updatable(id, src, api) {
             event.preventDefault();
             api.deletePost(id)
                 .catch (response => {
-                    handleError(response.status, response.message);
+                    handleError(response);
                 })
                 showModal("Success!", "Deleted Successfully");
             
