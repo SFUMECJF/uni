@@ -5,6 +5,11 @@ import { fileToDataUrl, showModal, checkNewEmail,
         handleError, removeFollow, createFollowingList} from './helpers.js';
 
 
+/**
+ * Given a username, will get the profile from API
+ * @param {API} api 
+ * @param {string} username 
+ */
 export function getProfile(api, username) {
     api.getUser(username)
         .then (response => {
@@ -15,7 +20,12 @@ export function getProfile(api, username) {
         })  
 }
 
-
+/**
+ * Given a response, will show a modal of the profile.
+ * Used both for showing the user and other people's profiles
+ * @param {JSON} response 
+ * @param {API} api 
+ */
 export function profileModal(response, api) { 
     const profileCard = document.createElement('div');
     // name
@@ -189,6 +199,13 @@ export function profileModal(response, api) {
 
 }   
 
+/**
+ * Given an array of posts, will create a new SCROLLABLE
+ * feed within the modal!
+ * @param {array} posts 
+ * @param {API} api 
+ * @returns 
+ */
 function createProfileFeed(posts, api) {
     const newFeed = document.createElement('div');
     newFeed.setAttribute('class', 'feed-container flex-column')

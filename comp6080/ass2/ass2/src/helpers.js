@@ -98,7 +98,7 @@ export function checkNewEmail(newEmail) {
  * @param {HTMLElement} element 
  * @param {String} newContent 
  */
- export function changeText(element, content) {
+export function changeText(element, content) {
     // only edits if the element exists on the page
     if (element !== null) {
         if (element.firstChild !== null) {
@@ -113,6 +113,13 @@ export function checkNewEmail(newEmail) {
 
 }
 
+/**
+ * Given a message, will print an error message in both the console and to the user
+ * Handles going suddenly offline sometimes as well through
+ * the 'failed to fetch' error being printed 
+ * until there is a refresh and it says no internet
+ * @param {mixed} message 
+ */
 export function handleError(message) {
     console.log("ERROR", message);
     if (message !== undefined) {
@@ -149,6 +156,11 @@ export function removeUserDetails() {
     localStorage.removeItem('token');
 }
 
+/**
+ * Given the id of a user, will remove the id from the 
+ * local storage follow list and update it
+ * @param {int} id 
+ */
 export function removeFollow(id) {
     let followArray = localStorage.getItem('following');
     let counter = 0;
@@ -201,13 +213,4 @@ export function closeModal() {
     // close modal
     const modal = document.getElementById('modalContainer');
     modal.style.display = 'none';
-}
-
-export function docDown(event) {
-    console.log('down');
-    if (document.scrollingElement.scrollTop >= (document.body.scrollHeight/4 * 3)) {
-        console.log('hit bottom!');
-        getMoreFeed(api, feed, false);
-    }
-    
 }

@@ -314,6 +314,14 @@ function updateLikes(id, newNumber) {
     }
 }
 
+/**
+ * Will create a new input used for comments and updates.
+ * returns an array of 2 values;
+ * array[0] points to the actual form to listen for submit
+ * array[1] points to textArea to get actual input without
+ * having to add an id
+ * @returns {Array}
+ */
 function createInput() {;
     const form = document.createElement('form');
 

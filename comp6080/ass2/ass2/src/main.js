@@ -27,6 +27,14 @@ const login = document.getElementById('login'),
     feed = document.getElementById('feedContainer'),
     post = document.getElementById('post');
 
+
+/**
+ * Given an event will check if it has hit the bottom of document
+ * Works sometimes. can be very unreliable. Yet to find anotehr method
+ * Suspect it is because of the updating/unlimited scroll and how
+ * the page reacts when there is an increase in the body.scrollheight
+ * @param {event} event 
+ */
 const docDown = function(event) {
     console.log('down');
     if (document.scrollingElement.scrollTop >= (document.body.scrollHeight/2)) {
@@ -53,8 +61,8 @@ if (localStorage.getItem('token') !== null) {
 
 
 /**
- * Lots Of listeners
- */
+ *              Lots Of listeners
+*/
 
 
 // handles login attempt

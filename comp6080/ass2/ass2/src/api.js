@@ -160,6 +160,11 @@ export default class API {
         return fetch(`${this.url}/user/${follow}?username=${username}`, data);
     }
 
+    /**
+     * Given a post, will return post details from API  
+     * @param {int} id 
+     * @returns post details
+     */
     getPost(id) {
         const data = {
             method: 'GET',
@@ -171,6 +176,13 @@ export default class API {
         return fetch(`${this.url}/post?id=${id}`, data).then(post => post.json());
     }
 
+    /**
+     * Given an id of a post, will update with src and description
+     * @param {int} id 
+     * @param {string} src 
+     * @param {string} description 
+     * @returns 
+     */
     editPost(id, src, description) {
         const data = {
             method: 'PUT',
@@ -201,6 +213,12 @@ export default class API {
         return fetch(`${this.url}/post?id=${id}`, data).then(post => post.json());
     }
 
+    /**
+     * Given image (in base64) and description in string, will post a new post
+     * @param {string} src 
+     * @param {string} description 
+     * @returns 
+     */
     newPost(src, description) {
         const data = {
             method: "POST", 
@@ -215,6 +233,11 @@ export default class API {
         return fetch(`${this.url}/post`, data).then(post => post.json());
     }
 
+    /**
+     * Given a JSON object will attempt to update account
+     * @param {JSON} responseData Data to change
+     * @returns 
+     */
     updateAccount(responseData) {
         const data = {
             method: "PUT", 
