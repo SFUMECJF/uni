@@ -99,7 +99,7 @@ export function profileModal(response, api) {
                 let cannot = '';
                 let data = {}
                 // everything defaults to ''
-                if (confirmPassword.value === editPassword.value && confirmPassword.value !== '') {
+                if ((confirmPassword.value === editPassword.value )&& confirmPassword.value !== '') {
                     data['password'] = editPassword.value;
                     changed = changed + "Changed password! "
                 } else {
