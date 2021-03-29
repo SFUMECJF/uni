@@ -127,6 +127,15 @@ export function addFeedContent(element, api) {
     likeLabel.setAttribute('id', 'likeBtnLabelId' + post.id);
     likeLabel.appendChild(document.createTextNode('like'));
 
+    // if the user has liked the post already and has refreshed
+    if (meta.likes.includes(parseInt(localStorage.getItem('id'), 10))) {
+        console.log('hit');
+        likeButton.classList.add = 'active';
+        likeLabel.classList.add = 'active';
+        changeText(likeLabel, 'unlike');
+        likeButton.checked = true;
+    }
+
     // creating comment button 
     // for later
     const commentButton = document.createElement('button');
@@ -158,6 +167,7 @@ export function addFeedContent(element, api) {
         showModal("Likes", createLikeList(meta.likes, api));
     })
 
+    // opening comments listener
     comments.addEventListener('click', event => {
         event.preventDefault();
         if (post.nComments === 0) {
@@ -185,8 +195,8 @@ export function addFeedContent(element, api) {
                 .then(response => response.json())
                 .then (response => {
                     post.nLikes ++;
-                    //updateLikes('likes' + post.id, post.nLikes);
-                    //changeText(likeLabel, 'unlike');
+                    updateLikes('likes' + post.id, post.nLikes);
+                    changeText(likeLabel, 'unlike');
                     console.log('Done', response);
                 })
                 .catch(response => {
@@ -197,8 +207,8 @@ export function addFeedContent(element, api) {
                 .then(response => response.json())
                 .then (response => {
                         post.nLikes --;
-                        //updateLikes('likes' + post.id, post.nLikes);
-                        //changeText(likeLabel, 'like');
+                        updateLikes('likes' + post.id, post.nLikes);
+                        changeText(likeLabel, 'like');
                         console.log('Done', response);
                 })
                 .catch(response => {
@@ -206,6 +216,7 @@ export function addFeedContent(element, api) {
                 })
         }
     })
+    
     // creating the card!
     // author + post date
     feedUnit.appendChild(feedHeader);

@@ -1,6 +1,6 @@
 import API from './api.js';
 // A helper you may want to use when uploading new images to the server.
-import { fileToDataUrl, showModal, checkNewEmail} from './helpers.js';
+import { fileToDataUrl, showModal, checkNewEmail, setUserId} from './helpers.js';
 import {getNewFeed} from './feed.js'
 
 // This url may need to change depending on what port your backend is running
@@ -29,6 +29,7 @@ const login = document.getElementById('login'),
 if (localStorage.getItem('token') !== null) {
     feed.style.display = 'flex';
     nav.style.display = 'inline';
+    setUserId(api);
     getNewFeed(api);
 
 } else {
@@ -51,14 +52,17 @@ login.addEventListener("submit", event => {
         .then(response => {
             if (response.status === 200) {
                 response.json()
-                    .then(token => {
+                    .then(response => {
                         // shows the feed and allows for logout. also sets token in localstorage
                         login.style.display = 'none';
                         
                         feed.style.display = 'flex';
 
                         // set token
-                        localStorage.setItem('token', token.token);
+                        localStorage.setItem('token', response.token);
+
+                        // set user id
+                        setUserId(api);
                         // printing token for dev use
                         console.log(localStorage.getItem('token'));
                         // show navigation only avaliable if logged in
@@ -147,6 +151,7 @@ signupButton.addEventListener("click", event => {
 logout.addEventListener('click', event => {
     event.preventDefault();
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
     login.style.display = 'block';
     nav.style.display = 'none';
     feed.style.display = 'none';

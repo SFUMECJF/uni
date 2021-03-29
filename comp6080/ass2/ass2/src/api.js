@@ -76,6 +76,22 @@ export default class API {
         return fetch(`${this.url}/user?id=${id}`, data);
     }
     /**
+     * get current user id
+     * @returns fetch
+     */
+    getCurrentUserId() {
+        const data = {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            },
+        }
+
+        return fetch(`${this.url}/user`, data);
+    }
+
+    /**
      * Given an id, will attempt to like the post
      * Like will allow for unlike or like
      * @param {string} id 

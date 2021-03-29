@@ -144,3 +144,18 @@ export function handleError(status, message) {
 
     }
 }
+
+/**
+ * given an api will set user id to localStorage
+ * @param {api} api 
+ */
+export function setUserId(api) {
+    api.getCurrentUserId()
+        .then(response => (response.json()))
+        .then(response => {
+            localStorage.setItem('id', response.id);
+        })
+        .catch(response => {
+            handleError(response.status, response.message);
+        })
+}
