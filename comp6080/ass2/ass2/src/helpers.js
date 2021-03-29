@@ -34,7 +34,7 @@ export function fileToDataUrl(file) {
  * Removes all child nodes in given element
  * @param {HTMLElement} element 
  */
- export function removeChilds(element) {
+export function removeChilds(element) {
     while(element.hasChildNodes()) {
         element.removeChild(element.childNodes[0]);
     }

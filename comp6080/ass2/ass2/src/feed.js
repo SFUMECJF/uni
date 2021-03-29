@@ -12,8 +12,14 @@ import {getProfile} from './profile.js';
  * @param {HTMLElement} feed
  */
 export function getMoreFeed(api, p, feed) {
-    
-    api.getFeed('user/feed', p)
+    if (localStorage.getItem('following').length === 0) {
+        removeChilds(feed);
+        const followToSee = document.createElement('div');
+        followToSee.appendChild(document.createTextNode('follow to see content!'));
+        followToSee.style.textAlign = 'center';
+        feed.appendChild(followToSee);
+    } else {
+        api.getFeed('user/feed', p)
         .then(jsonResponse => {
             if (jsonResponse.posts !== undefined && jsonResponse.posts.length !== 0) {
                 jsonResponse.posts.forEach(element => {
@@ -25,7 +31,7 @@ export function getMoreFeed(api, p, feed) {
         .catch(response => {
             handleError(response);
         })
-    
+    }
     // increments in 10 to ensure it keeps on loading infinitely
     return 10;
 }
