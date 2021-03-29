@@ -1,6 +1,6 @@
 import API from './api.js';
 // A helper you may want to use when uploading new images to the server.
-import { fileToDataUrl, showModal, checkNewEmail, setUserDetails, removeUserDetails, removeFeed} from './helpers.js';
+import { fileToDataUrl, showModal, checkNewEmail, setUserDetails, removeUserDetails, removeFeed, closeModal} from './helpers.js';
 import {getMoreFeed} from './feed.js'
 import { getProfile } from './profile.js';
 
@@ -190,17 +190,34 @@ profile.addEventListener('click', event => {
 post.addEventListener('click', event => {
 
     const postBody = document.createElement('form');
+    // text inpit
     const description = document.createElement('textarea');
+    // file input
     const photoInput = document.createElement('input');
     photoInput.setAttribute('type', 'file');
-    const postConfirm = document.createTextNode('input');
+    // confirm button
+    const postConfirm = document.createElement('input');
     postConfirm.setAttribute('type', 'submit');
     
 
 
     postBody.appendChild(description);
     postBody.appendChild(photoInput);
+    postBody.appendChild(document.createElement('br'));
+    postBody.appendChild(postConfirm);
+    postBody.addEventListener('submit', event => {
+        event.preventDefault();
+        fileToDataUrl(photoInput.files[0])
+            .then(file => {
+                api.newPost(file, description.value)
+                    .catch (response => {
+                        handleError(response.status, response.message);
+                    })
+                showModal("Success!", "Posted Successfully");
+            })
+        closeModal();
+    })
 
-    postBody.addEventListener('submit', )
+    showModal("New Post!", postBody);
 })
 

@@ -298,6 +298,7 @@ function createInput() {;
     submit.setAttribute('type', 'submit');
 
     form.appendChild(textArea);
+    form.appendChild(document.createElement('br'));
     form.appendChild(submit);
 
     return [form, textArea];
@@ -350,7 +351,7 @@ function updatable(id, src, api) {
                 .catch (response => {
                     handleError(response.status, response.message);
                 })
-            closeModal();
+            showModal("Success!", "Updated Successfully");
         })
 
         showModal('Update Post!', form);
@@ -374,7 +375,7 @@ function updatable(id, src, api) {
                 .catch (response => {
                     handleError(response.status, response.message);
                 })
-            closeModal();
+                showModal("Success!", "Deleted Successfully");
             
         })
         showModal('Delete Post!', deleteDiv);

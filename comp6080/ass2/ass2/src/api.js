@@ -207,7 +207,10 @@ export default class API {
             headers: {
                 'content-type' : 'application/json',
                 'Authorization': `Token ${localStorage.getItem('token')}`,
-            },
+            }, body: JSON.stringify({
+                "src": src.split(',')[1],
+                'description_text': description
+            })
         }
         return fetch(`${this.url}/post`, data).then(post => post.json());
     }
