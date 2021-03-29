@@ -127,7 +127,7 @@ export function checkNewEmail(newEmail) {
  * @param {String} newContent 
  */
  export function changeText(element, content) {
-    if (element.hasChildNodes) {
+    if (element.firstChild !== null) {
         removeChilds(element);
     }
 
