@@ -75,4 +75,21 @@ export default class API {
 
         return fetch(`${this.url}/user?id=${id}`, data);
     }
+    /**
+     * Given an id, will attempt to like the post
+     * Like will allow for unlike or like
+     * @param {string} id 
+     * @param {string} like
+     */
+    like(id, like) {
+        const data = {
+            method: 'PUT',
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+                'query': id
+            },
+        }
+        return fetch(`${this.url}/post/${like}?id=${id}`, data);
+    }
 }

@@ -16,7 +16,6 @@
 </head>
 <body>
     <!-- This is an example app structure, you can modify this as much as you choose --> 
-    
     <header class="banner">
         <h1>Quickpic</h1>
         <ul class="nav" id="nav">
@@ -27,7 +26,7 @@
         <!-- app goes here --> 
 
         <!--Modal Container used for all notifications-->
-        <div class="modal" tabindex="-1" role="dialog" id="modalContainer">
+        <div class="modal" tabindex="-1" role="dialog" data-backdrop="true" id="modalContainer" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -36,6 +35,7 @@
                 <div class="modal-body" id="modalContent">
                   Filler
                 </div>
+                
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary" id="modalClose">Close</button>
                 </div>

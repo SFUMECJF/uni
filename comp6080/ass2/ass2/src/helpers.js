@@ -67,7 +67,6 @@ export function showModal(title, content) {
     // close button
     let newButton = document.createElement('button');
     newButton.appendChild(document.createTextNode("Close"));
-    //newButton.setAttribute('class', submitButton);
 
     modalTitle.appendChild(newTitle);
     modalContent.appendChild(newContent);
@@ -120,4 +119,28 @@ export function createLikeList(uidLikes, api) {
 export function checkNewEmail(newEmail) {
     const regex = /^[^\s@]+@[^\s@]+$/;
     return regex.test(newEmail);
+}
+
+/**
+ * Given a single element, will change the text content within
+ * @param {HTMLElement} element 
+ * @param {String} newContent 
+ */
+ export function changeText(element, content) {
+    if (element.hasChildNodes) {
+        removeChilds(element);
+    }
+
+    var newContent = document.createElement('span');
+
+    newContent.appendChild(document.createTextNode(content));
+    element.appendChild(newContent);
+}
+
+export function handleError(status, message) {
+    console.log(status, message);
+    if (status !== undefined && message !== undefined) {
+    showModal(status.toString(), message.toString());
+
+    }
 }

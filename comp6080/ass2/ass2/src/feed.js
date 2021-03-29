@@ -1,5 +1,7 @@
 import API from './api.js';
-import { fileToDataUrl, showModal, checkNewEmail, removeChilds, createLikeList} from './helpers.js';
+import { fileToDataUrl, showModal, checkNewEmail, 
+        removeChilds, createLikeList, changeText, 
+        handleError} from './helpers.js';
 
 
 /**
@@ -26,7 +28,7 @@ export function getNewFeed(api) {
 
         // log error in console
         .catch(response => {
-            console.log(response.message, response.status)
+            handleError(response.status, response.message);
         })
 }
 
@@ -88,12 +90,13 @@ export function addFeedContent(element, api) {
     // USED FOR SHOWING LIKES!
     const likes = document.createElement('button');
     likes.setAttribute('class', 'btn btn-link');
+    likes.setAttribute('id', 'likes' + post.id);
     if (post.nLikes === 0) {
-        likes.appendChild(document.createTextNode("Be the first to like"))
+        likes.appendChild(document.createTextNode("Be the first to like"));
     } else if (post.nLikes === 1) {
         likes.appendChild(document.createTextNode("1 like"));
     } else {
-        likes.appendChild(document.createTextNode(post.nLikes + " likes"))
+        likes.appendChild(document.createTextNode(post.nLikes + "likes"));
     }
 
     // likes (currently doesn't show anything but has number of likes)
@@ -106,10 +109,36 @@ export function addFeedContent(element, api) {
         comments.appendChild(document.createTextNode("1 comment"));
 
     } else {
-        comments.appendChild(document.createTextNode(post.nLikes + " comments"))
+        comments.appendChild(document.createTextNode(post.nLikes + " comments"));
 
     }
 
+    // creating like button
+    const likeButton = document.createElement('input');
+    likeButton.setAttribute('type', 'checkbox');
+    likeButton.setAttribute('class', 'btn-check');
+    likeButton.setAttribute('id', 'likeBtnId' + post.id);
+    likeButton.setAttribute('autocomplete', 'off');
+
+    // like button label 
+    const likeLabel = document.createElement('label');
+    likeLabel.setAttribute('class', 'btn btn-outline-primary');
+    likeLabel.setAttribute('for', 'likeBtnId' + post.id);
+    likeLabel.setAttribute('id', 'likeBtnLabelId' + post.id);
+    likeLabel.appendChild(document.createTextNode('like'));
+
+    // creating comment button 
+    // for later
+    const commentButton = document.createElement('button');
+    commentButton.setAttribute('class', 'btn btn-secondary');
+    commentButton.appendChild(document.createTextNode('comment'));
+
+    // creating div for like and comment button
+    const interactionDiv = document.createElement('div');
+    interactionDiv.appendChild(likeButton);
+    interactionDiv.appendChild(likeLabel);
+    interactionDiv.appendChild(commentButton);
+    
     // feed header
     feedHeader.appendChild(author);
     feedHeader.appendChild(postDate);
@@ -117,20 +146,20 @@ export function addFeedContent(element, api) {
     // adding to card body
     cardBody.appendChild(desc);
     cardBody.appendChild(image);
+
     cardBody.appendChild(likes);
     cardBody.appendChild(comments);
 
+    cardBody.appendChild(interactionDiv);
     // adding listeners
     // like listener button to list
     likes.addEventListener('click', event => {
         event.preventDefault();
-
         showModal("Likes", createLikeList(meta.likes, api));
     })
 
     comments.addEventListener('click', event => {
         event.preventDefault();
-
         if (post.nComments === 0) {
             showModal("Comments", "Be the first to comment!");
         } else {
@@ -148,12 +177,57 @@ export function addFeedContent(element, api) {
         }
     })
     
-    
+    // adding listener for likes
+    likeButton.addEventListener('change', event => {
+        event.preventDefault();
+        if (likeButton.checked) {
+            api.like(post.id, 'like') 
+                .then(response => response.json())
+                .then (response => {
+                    post.nLikes ++;
+                    //updateLikes('likes' + post.id, post.nLikes);
+                    //changeText(likeLabel, 'unlike');
+                    console.log('Done', response);
+                })
+                .catch(response => {
+                    handleError(response.status, response.message);
+                })        
+        } else {
+            api.like(post.id, 'unlike') 
+                .then(response => response.json())
+                .then (response => {
+                        post.nLikes --;
+                        //updateLikes('likes' + post.id, post.nLikes);
+                        //changeText(likeLabel, 'like');
+                        console.log('Done', response);
+                })
+                .catch(response => {
+                    handleError(response.status, response.message);
+                })
+        }
+    })
     // creating the card!
     // author + post date
     feedUnit.appendChild(feedHeader);
     // the entire body including
     // image, description, likes and comments
     feedUnit.appendChild(cardBody);
-    return feedUnit
+
+    return feedUnit;
+}
+
+/**
+ * Given an id will update with new likes number
+ * @param {string} id 
+ * @param {int} new number of likes
+ */
+function updateLikes(id, newNumber) {
+    const likes = document.getElementById(id);
+    if (newNumber === 0) {
+        changeText(likes, "Be the first to like");
+    } else if (newNumber === 1) {
+        changeText(likes, "1 like");
+    } else {
+        changeText(likes, newNumber + " likes");
+    }
 }
