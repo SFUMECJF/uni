@@ -15,12 +15,7 @@ inter_construction(C1 <- B1, C2 <- B2, C1 <- Z1B, C2 <- Z2B, C <- B):-
     append(B11, [C], Z1B),
     append(B12, [C], Z2B).
 
-
-/* if the first list is empty, just return the second list with empty z */
-intra_construction(C1 <- [], C1 <- B2, C1 <- B2, D <- [], D <- []):-
-    gensym(z, D).
-
-/* Valid intraconstruction lists! */
+/* Intraconstruction */
 intra_construction(C1 <- B1, C1 <- B2, C1 <- B, D <- Z1B, D <- Z2B):-
     B1 \= B2,
     intersection(B1, B2, Z),
@@ -29,22 +24,14 @@ intra_construction(C1 <- B1, C1 <- B2, C1 <- B, D <- Z1B, D <- Z2B):-
     subtract(B1, B, Z1B),
     subtract(B2, B, Z2B).
     
-
-/* if the first list is empty, then just return the second list and an empty list as absorption */
-absorption(C1 <- [], C2 <- B2, C1 <- B2, C2 <- []).
-
-/* valid absorbtion lists! */
+/* Absorbtion */
 absorption(C1 <- B1, C2 <- B2, C1 <- Z1B, C2 <- Z2B) :-
     C1 \= C2,
     intersection(B1, B2, Z2B),
     subtract(B1, Z2B, Temp),
     append([C2], Temp, Z1B).
 
-
-/* Empty first list means there is no intersection! We return the second list as well as an empty list to signify as such */
-idenitification(C1 <- [], C1 <- B2, C1 <- B2, y <- []).
-
-/* else there is a valid list to attempt to identify */
+/* Identification. */
 identification(C1 <- B1, C1 <- B2, C1 <- Z1B, y <- Z2B) :-
     B1 \= B2,
     intersection(B1, B2, TestIden),
@@ -57,14 +44,9 @@ identification(C1 <- B1, C1 <- B2, C1 <- Z1B, y <- Z2B) :-
     append(TestIden, TestB2Iden, Z1B),
     subtract(B1, TestIden, Z2B).
 
-
-/* if the first list is empty, you can just return the second list as it is as there are
- * No intersections */
-dichotomisation(C1 <- [], not(C1) <- B2, C1 <- [], not(C1) <- B2, D1 <- [], not(D1) <- []):-
-    gensym(z, D1).
     
 /* There exists one so do the dochotomisation
- * Assumes that the unique variable will always be in B2*/
+ * Uses C1 and compares to not(c1) for valid output */
 dichotomisation(C1 <- B1, not(C1) <- B2, C1 <- Z1B, not(C1) <- Z2B, D1 <- Z3B, not(D1) <- Z4B):-
     gensym(z, D1),
     intersection(B1, B2, Intersect),
@@ -77,10 +59,6 @@ dichotomisation(C1 <- B1, not(C1) <- B2, C1 <- Z1B, not(C1) <- Z2B, D1 <- Z3B, n
     subtract(B2, Z4B, SecondSubtract),
     append(SecondSubtract, [not(D1)], Z2B).
     
-
-/* empty first list means there is no intersection */
-truncation(C1 <- [], C1 <- [_], C1 <- []).
-
 /* Else just returns the intersection of the two lists */
 truncation(C1 <- B1, C1 <- B2, C1 <- ZB):-
     B1 \= B2,
