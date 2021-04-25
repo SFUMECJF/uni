@@ -24,24 +24,27 @@ intra_construction(C1 <- B1, C1 <- B2, C1 <- B, D <- Z1B, D <- Z2B):-
     subtract(B1, B, Z1B),
     subtract(B2, B, Z2B).
     
-/* Absorbtion */
+/* Absorbtion 
+ * Only prints if there is at least 1 intersection!*/
 absorption(C1 <- B1, C2 <- B2, C1 <- Z1B, C2 <- Z2B) :-
     C1 \= C2,
     intersection(B1, B2, Z2B),
+    not(length(Z2B, 0)),
     subtract(B1, Z2B, Temp),
     append([C2], Temp, Z1B).
 
 /* Identification. */
-identification(C1 <- B1, C1 <- B2, C1 <- Z1B, y <- Z2B) :-
+identification(C1 <- B1, C1 <- B2, C1 <- B2, NewPointer <- Z2B) :-
     B1 \= B2,
     intersection(B1, B2, TestIden),
     /* Since we can assume the order of the lists with the second ALWAYS being the one with
      * Identification, we just have to test number 2 
     */
     subtract(B2, TestIden, TestB2Iden),
-    /* Find the length of the list and if it is 0, then we have idenfified it! */
+    /* Find the length of the list and if it is 0, then we have idenfified it! 
+     * Since the length has to be 1, we can just set NewPointer as the 0th index of the result list*/
     length(TestB2Iden, 1),
-    append(TestIden, TestB2Iden, Z1B),
+    nth0(0, TestB2Iden, NewPointer),
     subtract(B1, TestIden, Z2B).
 
     
