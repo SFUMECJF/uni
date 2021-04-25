@@ -1,4 +1,4 @@
-/* 
+/*
  * COMP 3411 assignment part2
  * By John Dao
  * z5258962
@@ -62,12 +62,14 @@ identification(C1 <- B1, C1 <- B2, C1 <- Z1B, y <- Z2B) :-
  * No intersections */
 dichotomisation(C1 <- [], C2 <- B2, C1 <- [], C2 <- B2, D1 <- [], not(D1) <- []):-
     C1 \= C2,
+    C1 = not(C2),
     gensym(z, D1).
     
 /* There exists one so do the dochotomisation
  * Assumes that the unique variable will always be in B2*/
 dichotomisation(C1 <- B1, C2 <- B2, C1 <- Z1B, C2 <- Z2B, D1 <- Z3B, not(D1) <- Z4B):-
     C1 \= C2,
+    C1 = not(C2),
     gensym(z, D1),
     intersection(B1, B2, Intersect),
     /* Get the first list subtraction and appends */
