@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register Check snapshot after Confirm password 1`] = `ShallowWrapper {}`;
+
+exports[`Register Check snapshot after Email 1`] = `ShallowWrapper {}`;
+
+exports[`Register Check snapshot after Password 1`] = `ShallowWrapper {}`;
+
+exports[`Register Check snapshot after title 1`] = `ShallowWrapper {}`;
+
+exports[`Register Check snapshot after username 1`] = `ShallowWrapper {}`;
+
+exports[`Register Register shallow renders onto page 1`] = `ShallowWrapper {}`;

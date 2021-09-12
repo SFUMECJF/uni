@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Can close via pressable close button 1`] = `ShallowWrapper {}`;
+
+exports[`Modal Can close via x button at top 1`] = `ShallowWrapper {}`;
+
+exports[`Modal Check snapshot after content 1`] = `ShallowWrapper {}`;
+
+exports[`Modal Modal shallow renders onto page 1`] = `ShallowWrapper {}`;
+
+exports[`Modal check snapshot after title 1`] = `ShallowWrapper {}`;

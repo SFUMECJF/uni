@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Play Game Screen check snapshot after user answer check 1`] = `ShallowWrapper {}`;
+
+exports[`Play Game Screen check snapshot after user duration check 1`] = `ShallowWrapper {}`;
+
+exports[`Play Game Screen check snapshot after user point check 1`] = `ShallowWrapper {}`;
+
+exports[`Play Game Screen check snapshot after user question check 1`] = `ShallowWrapper {}`;
+
+exports[`Play Game Screen mounts shallow render 1`] = `ShallowWrapper {}`;
