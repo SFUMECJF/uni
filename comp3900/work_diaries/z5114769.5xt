@@ -1,0 +1,98 @@
+Dairy
+
+Week 1 
+1/06/2021
+Had our two hour group lab today. Completed admin tasks with tutor. As a group we assigned roles for each other, and completed an outline of our proposal on a shared google doc. In the meeting, I created the google doc, completed user story 6 and 7, and created the sprint plan for the term. I also participated in the group discussions involving distribution of work and a variety of project decisions including the programming languages to use.
+
+06/06/2021
+Today I worked on the task assigned to me through this week. This included the detailed schedule of our sprints. This included grouping the user stories into appropriate sprints, estimating the time taken for each sprint, and placing a start and end time on each sprint. Additionally in the proposal I wrote a summary of the work to completed in each sprint, and any deadlines to be considered for assessments.
+
+Later today we had a group meeting to check on our progress, everyone mostly completed their tasks, and we decided to use an SQL data base system rather than noSQL. Additionally, we assigned everyone a portion of acceptance criteria to add to each user stories, and I completed my allocated section of work once the meeting was concluded.
+
+Week2
+08/06/2021
+Had our Laboratory meeting today, discussed with the tutor the sprint plan. Also discussed novel ideas for our project. I allocated responsibilities for everyone to complete this week. I assigned myself to update the sprint plan, add the novel user stories, and to begin work on the frontend framework.
+
+Later today, I completed the tasks that we assigned to me, including finishing the user stories and acceptance criteria, and modifying the sprint schedule.
+
+13/06/2021
+Today I finished the rest of the user story acceptance criteria that was incomplete. I then had a 1 hour meeting with James to discuss how we wanted to implement the front-end and split up the work. I finished with a 30 minute team meeting were we discussed our project. We are on schedule so everything went well. Meeting was spent updating progress, and specifically talking about how we wanted to format the proposal, especially the storyboard section.
+
+Week 3
+15/06/2021
+Today was our weekly lab where we caught up with our supervisor. He went through our draft proposal and gave us pointers on the contents and formatting. My notes from the session can be seen below.
+Notes from meeting
+Specify that its a web app. Submit formal name, remove IT project.Table of contents. Format with numbers (Maybe latex). Change APA reference to shorten. Possible table format when comparing.User story & sprints -> User story and sprints. Add comments next to screenshots to guide the reader. Remove ‘report formatting’ from ‘Technical depth, scale, and report formatting. Rethink user roles, possibly admin? 20MB limit. Write paragraphs on top of story boards. 
+
+Later today, I updated the user stories section in response to the feedback was given. I also participated in group discussions in our group chat to help organise ourselves. 
+
+17/06/2021
+Today we had a brief meeting discussing our progress. I shared the work I finished on tuesday. And we were all happy with the work that was done.
+
+19/06/2021
+Today I started coding. I am responsible for the user profile and connectivity front end. I created my branch, and starting working on the code, including installing packages and getting the initial framework running.
+
+Week 4
+22/06/2021
+Attended labratory to have meeting with team. Everyone discussed their progress, however not much to share just yet since we only started our sprint 4 days ago.
+
+23/06/2021
+Today I did a large amount of coding. I continued to implement the connectivity and profile user stories. I also had a meeting with my front-end partner James to talk about progress.
+
+25/06/2021
+Today I spent a small amount of time after working coding.
+
+Week 5
+27/06/2021
+Today I finished all the front end implementation of the user stories I was assigned for sprint one. I had a meeting with James to discuss progress. Also had a larger meeting with group to discuss progress. Half of backend is finished but other half is running behind. Currently waiting on backend to test connections properly before closing the sprint.
+
+29/06/2021
+Today we had our week 5 presentation. It went well since almost everything from the sprint was finished. Only waiting on a few backend implementions to then close this sprint off.
+
+01/07/2021
+Backend finished their implementation so I did some work today on integrating the front end with the backend. Not completely finished yet.
+
+03/07/2021
+Finished integrating with backend, we decided that we wanted to add some extra functionality so I've been working on that today.
+
+04/07/2021
+Finished everything for sprint 1. Closed the sprint and moving on to sprint 2. We had a group meeting today to talk about submitting the retrospective we did on Tuesday. We discussed the formatting our scrum master put it in and submitted it with everyones approval.
+Week 6
+07/07/2021
+Started to work on what I was allocated for sprint 2. Implemented the basic visuals for tasks.
+
+Week 7
+12/07/2021
+Added props to the tasks, waiting on others work so that I can continue integrations
+
+17/07/2021
+Everything was now set up for me to finish my tasks. I almost finished all user stories today, just a bit of bug fixing to go. I had a meeting with James today to talk about how the sprint is going, sounds like hes having a tough time with his workload. 
+
+18/07/2021
+Today I finished all of my alocated user stories. We also had a group meeting to discuss the project. I asked everyone if they could help with the front-end work for the final sprint, as I'm a little worried the workload will be too large in a two week period. 
+
+Week 8
+20/07/2021
+Today we did our demo. Everything ran very smoothly as we were much more prepared as compared to Demo A. We had our retrospective where we talked about what went well and what didn't and made a plan for the upcoming sprint. I want to mostly focus on finishing core objectives to leave as much time as possible to polish the final product.
+
+24/07/2021
+Did some work fixing the task buttons and other small mistakes from the previous sprint. Had a meeting with James to shift our workloads due to him struggling to implement messaging.
+
+Week 9
+27/07/2021
+Had our meeting again, it was a slow week for me but the backend has finished everything they needed to do so I can start to implement the backend integrations.
+
+29/07/2021
+Today I worked heavily to get everything finished. I was struggling particularly with task search as a didn't have the exact backend API's I wanted to work with. Eventually I figured everything out and task search was implemented.
+
+31/07/2021
+Today I finished everything that I needed to. We had a task meeting where we fixed the last bugs associated with busyness. Additionally we made a plan for how we wanted to write the report. 
+
+1/08/2021
+Today I finished my part for the report, and we had a meeting to clean everything up for submission tomorrow. The code is still messy but I will fix that tomorrow. 
+
+2/08/2021
+Today I made some last small functionality changes, I also commented and cleaned the code that I wrote. We spent today fixing last few bugs, making sure everything was ready to be presented tomorrow, and to practice for our demonstration.
+
+
+

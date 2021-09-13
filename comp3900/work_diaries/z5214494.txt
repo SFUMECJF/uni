@@ -1,0 +1,38 @@
+Work diary of Jaydon Tse z5214494
+
+Week 1
+I broke down the requires of taskmaster, mainly the first few requirements.
+I have been delegated into the backend role, as well as doing the Storyboard.
+
+Week 2
+Worked a bit on the storyboard. Created a draft, but they are mostly handwritten. 
+The draft has been turned into a digital format. It should include most of the functions of the project.
+
+Week 3
+I am also tasked with converting the proposal into word and using APA referencing. 
+The storyboard I made is too large to fit into the proposal. I need to break it down and make it so it is just 1 diagram per function.
+
+week 4
+I am working on the connections functions. I have been recommended to use the django package friendship.
+It is said to be easy, but i find it diffcult to impliment. I can't understand the input data type and outpute data types.
+
+week 5
+I am now working on the neural network of estimating how busy a user is based on their tasks. 
+At the moment, I am discussing and drafting the model that the neural network would look like
+
+week 6
+I have make a draft and recieved sample data made from randomly generated numbers.
+It is not working yet, there seems to be a few problems with the mismatch between tensors
+
+week 7
+I have got the functions working now. The core mechanics should be right, but at the moment I can't test them.
+I managed to get it working properly now. Although, the data is randomly generated and is senseless. 
+
+week 8
+There is a need to change the input and output amounts. We are going to have 5 instead of 1 input and 6 instead of 5 outputs. 
+Now I am trying to use it so that it will work when called by another file.
+
+week 9
+It works when called now. A new data set is created with data that has some meaning. So it should be useful.
+I also working on the report. Mostly writing down how my busyness works as well as doing the referencing at the end.
+

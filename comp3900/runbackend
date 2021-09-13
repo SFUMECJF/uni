@@ -1,0 +1,7 @@
+#!/bin/bash
+# Starts backend only
+konsole --noclose -e "bash -c 'cd backend
+. ./env/bin/activate
+cd APIbackend/
+python3 manage.py runserver'" &
+

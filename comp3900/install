@@ -1,0 +1,27 @@
+#!/bin/bash
+sudo apt-get update
+sudo apt -y install konsole
+sudo apt -y install python3-pip
+sudo apt -y install python3-virtualenv
+cd backend/
+virtualenv -p python3 env
+activate () {
+  . ./env/bin/activate
+}
+echo "installing django dependencies..."
+activate 
+. ./env/bin/activate
+cd APIbackend/
+pip3 install -q -r requirements.txt
+rm db.sqlite3 2> /dev/null
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc"  -delete
+python3 manage.py makemigrations
+python3 manage.py migrate --run-syncdb
+deactivate
+sudo chmod 777 db.sqlite3
+cd ../../client/
+sudo apt -y install npm
+npm install
+echo "***** Installation complete! *****"
+

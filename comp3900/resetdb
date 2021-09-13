@@ -1,0 +1,17 @@
+#!/bin/bash                                                                   
+# Resets the database                                                         
+cd backend/APIbackend/                                                        
+rm db.sqlite3 2> /dev/null                                                    
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete             
+find . -path "*/migrations/*.pyc"  -delete                                    
+cd ..                                                                         
+activate () {                                                                 
+  . ./env/bin/activate                                                        
+}                                                                             
+activate
+cd APIbackend
+python3 manage.py makemigrations
+python3 manage.py migrate --run-syncdb
+deactivate
+echo "***** Database successfully reset *****"
+

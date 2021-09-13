@@ -1,0 +1,83 @@
+Week 1
+
+1/06/2021
+Group formed. I initialised the GitHub repository and finished the System Requirements section for the Proposal. 
+I also planned the API endpoints for user authentication and user data retrieval with Swagger UI.
+
+
+Week 2
+
+7/06/2021
+Completed Figma designs for the first sprint and initialized the frontend code. We plan to finish the proposal by next week.
+
+Week 3
+
+15/06/2021
+The frontend code's first sprint is almost done, it just needs to handle errors and communicate with the API.
+I plan to have it finished by next week, and then I'll begin working on the next sprint.
+I also made some minor details on the proposal after a review from the tutor. The proposal should be submitted by this week.
+
+Week 4
+
+22/06/2021
+Connecting the frontend to the backend by sending REST API requests. Currently, the API backend does not conform to the API docs,
+making it harder for me to figure out the required route and parameters.
+
+23/06/2021
+Completed Access and Authentication user stories on the frontend, which also now communicates to the backend
+and handles correct errors. Backend diverged from some of the user stories, so there was a lot of miscommunication
+with handling the API.
+
+Week 5
+
+28/06/21
+Completed the frontend structure for some of the Connection user stories, but waiting on the API to be finished.
+Considering the first demo is tomorrow, the project is quite unorganised and could have some improvement by introducing
+deadlines. The last day before the demo should be for testing and preparation of the demo itself.
+
+29/06/21
+Had the demonstration today. Still couldn't finish the Connection user stories since they were partially finished
+and backend implementation started at 10pm. 
+
+Week 7
+
+12/07/21
+Created the structure for the create task page and the task components for the main page.
+
+14/07/21
+Connected the frontend to the create task endpoint, but could not do the others since changes
+to the backend are needed. John has confirmed that these endpoints are implemented for me to connect
+to.
+
+Week 8
+
+25/07/21
+Connected frontend to messaging backend. Users can now check who is offline and online
+
+Week 9
+
+28/07/21
+Spent the day debugging issues with authorization in the backend with John. After a gruelling amount of checking
+where the code was broken, we finally fixed it and was able to restore the software back to normal. 
+
+29/07/21
+Messaging is now complete. Users can now message in realtime and offline. 
+
+30/07/21
+Completed my sections for the final group project report including:
+- Descriptions of the functionalities developed by the team and how they map/address all project objectives
+- Frontend third-party functionalities
+
+I also spent the day documenting most of the frontend code, with the exclusion of most of Jake's code.
+
+31/07/21
+Wrote down my sections for the group report.
+
+Week 10
+
+01/18/21
+Added the user manual to the group report.
+
+02/08/21
+Fixed the duplicate messaging bug on the frontend. Had two mock demonstrations with the group. Submitted the final assignment.
+

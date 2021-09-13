@@ -1,0 +1,43 @@
+Week 1
+Wrote all user stories except a few to do with task management and user details, added to jira, helped organise these into epics
+Wrote acceptance criteria for task functionality
+Determined the choice of backend framework and database, suggested possible schemas
+
+Week 2:
+Wrote acceptance criteria for various user stories so we could understand exactly what to implement.
+Created initial Django app structure and configuration.
+Used Django-rest-framework to make Django run backend-only.
+Helped design user schema. 
+Created entire backend authentication system including registration, login,  unique token authentication by customising the inbuilt Django authentication system to suit our exact needs and schemas.
+Implemented all authentication endpoints.
+Implemented endpoints to create new users, update various user details, and retrieve user details.
+
+Week 3:
+Implemented password reset. Setup and configured email account and server, implemented all backend endpoints. Consisted of creating a reset request, which sent an email to the users account. Email contains link to reset password. Can use this link to reset the password.
+Helped upskill team members in Django.
+
+Week 4:
+Helped integrate backend with frontend, fix bugs, worked on design of other backend services. Contributed to API documentation.
+
+Week 5:
+Implemented all endpoints for task management in the backend from scratch. Users able to create, update, retrieve and delete tasks.
+Implemented backend endpoint for user search. Can retrieve users' details by providing their email.
+Implemented all endpoints for friendship in the backend. Selected Django friendship package, wrote our own custom code logic and endpoints using its functionality. Users able to send/receive friend requests, decline or accept them to become friends, view all their friends, delete their friends. 
+Helped design the task schema.
+
+Week 6:
+Implemented backend endpoint for task search. Can retrieve a subset of tasks by matching the title, summary, and/or other details.
+
+Week 7:
+Helped integrate backend with frontend, fix bugs.
+
+Week 8:
+Ensured all appropriate endpoints required user token authentication. Returned unique results to users based on their token provided.
+Allowed tasks to be assigned and reassigned to users.
+
+Week 9:
+Set up app to be run on the Lubuntu 20.4.1 LTS virtual machine. 
+Wrote all setup scripts. Scripts included installing all the dependencies of both frontend and backend, running the entire application (frontend and backend together), resetting the app database, and running frontend and backend separately.
+Wrote all documentation on how to use these scripts.
+Helped clean backend code.
+Worked on project report.

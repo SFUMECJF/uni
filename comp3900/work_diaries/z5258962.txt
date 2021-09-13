@@ -1,0 +1,61 @@
+Work Diary  
+This is the work diary for John (z5258962) from COMP3900-T10A-Placeholder.
+=================================================================================================================
+Week 1  
+- Collaborated form teams and progress on both the administrative work, as well as the proposal.  
+- Setup Jira for team collaboration and added all team members into Jira  
+- congregated in the tutorial to determine tech stack for task master as well as scheduling weekly scrum meetings  
+- Created the first sprint, our project proposal, as well as issues for the project proposal  
+- Worked on some user stories, mainly around core access and authentication and added them onto Jira
+- Created confluence document for the project proposal and worked on Background section of said project proposal  
+- Created the API docs on swagger and begun work on them
+
+Week 2
+- Continued work on background
+- Furthered development of the API docs
+- Administration handling of Jira and todo's for proposal sprint
+- Collaborated with the creation and restructuring of sprints
+- Sunday scrum meeting
+
+Week 3
+- Collaborated with the creation and restructuring of sprints now aligning with all demo dates
+- Induction into initialised backend codebase
+- Finilised first iteration of API docs
+- Meetings with both teams to ensure smooth transition into week prior to proposal submission
+- Thursday meeting (rescheduled)
+- Met with both teams again (Sunday) to ensure that development process is currently on target including demonstrations on progress
+
+Week 4
+- Fixed bugs with backend relating to password_reset
+- Fixed endpoints to match API docs and edited API docs to more match the current architecture
+- Initialised connections module for connections endpoints
+- Begun scoping for messaging endpoints
+- Confirmed the expansion of the scope of the project to include more novelty 
+
+Week 5
+- Continued to work with the backend to try to get friendships up and running
+- Begun implementation for messaging and scoping needs for web socketting
+- Created busyness delta project in response to low backend team utilisation
+- Completed busyness delta project specifications and assigned project to Jaydon Tse
+- Compiled Placeholder retrospective A + submission 
+
+Week 7
+- Worked with frontend team to alter endpoints to match their requirements including first_name, last_name and company to user returns
+- Added more returns for auth/login
+- Integrated a possible chat messaging system however socketting is proving to be difficult to test
+- Initiated weekly standups for busyness delta project to check on progress on novelty project
+
+Week 8
+- Deferred to using expressjs server to handle socketting
+- Re-integrated messaging storage system to be located in backend
+- Created features to allow posting, editing and retrieving messages that are associated with reference_id
+- Compiled Placeholder retrospective B + submission 
+
+Week 9 
+- Integrated busyness delta project and resulting model to generate an estimation based on machine learning model
+- Allowed the processing of user task data and busyness values for feeding into the model
+- Integrated busyness response endpoint
+- Continued to work on backend in bugfixes including issues about task authentication as well as data processing for busyness project
+- Integrated ap_scheduler into django which allowed updation of busyness delta machine learning model as well as reset for busyness feedback submission forms
+- Worked with team to get environment working in allowed environments
+

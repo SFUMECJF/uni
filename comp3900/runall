@@ -1,0 +1,11 @@
+#!/bin/bash
+# Starts frontend and backend
+konsole --noclose -e "bash -c 'cd backend
+. ./env/bin/activate
+cd APIbackend/
+python3 manage.py runserver'" &
+cd client/
+konsole --noclose -e "bash -c 'HTTPS=true npm start'" & 
+cd ../messaging/
+konsole --noclose -e 'node index.js' &
+
